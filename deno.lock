@@ -429,12 +429,12 @@
       "npm:@zag-js/checkbox@^1.18.5",
       "npm:@zag-js/core@^1.18.5",
       "npm:@zag-js/dom-query@^1.18.5",
-      "npm:@zag-js/utils@^1.18.5"
+      "npm:@zag-js/utils@^1.18.5",
+      "npm:alpinejs@^3.14.9"
     ],
     "members": {
       "example": {
         "dependencies": [
-          "npm:alpinejs@^3.14.9",
           "npm:vite@^7.0.5"
         ]
       }
