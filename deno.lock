@@ -1,9 +1,12 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@zag-js/checkbox@^1.18.5": "1.18.5",
     "npm:@zag-js/core@^1.18.5": "1.18.5",
+    "npm:@zag-js/dom-query@^1.18.5": "1.18.5",
     "npm:@zag-js/utils@^1.18.5": "1.18.5",
     "npm:alpinejs@^3.14.9": "3.14.9",
+    "npm:vite@7.0.5": "7.0.5_picomatch@4.0.3",
     "npm:vite@^7.0.5": "7.0.5_picomatch@4.0.3"
   },
   "npm": {
@@ -249,6 +252,20 @@
     "@vue/shared@3.1.5": {
       "integrity": "sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA=="
     },
+    "@zag-js/anatomy@1.18.5": {
+      "integrity": "sha512-pn7CgXX/O+dLrkz/p3E+GdEXeYZarL8No/QHUODmC8DEP3XCkEA+PYPOX/BZyYFmja+qfT+zHwerzDaaOo3gvA=="
+    },
+    "@zag-js/checkbox@1.18.5": {
+      "integrity": "sha512-2tAOy9FWCnu1qkjvYq19ZgNvd+AJygThz4IbY/mDCOin0xctxfE+JdfnSIJ6Obq9i50eZUKYZYT82o5A/hdRlA==",
+      "dependencies": [
+        "@zag-js/anatomy",
+        "@zag-js/core",
+        "@zag-js/dom-query",
+        "@zag-js/focus-visible",
+        "@zag-js/types",
+        "@zag-js/utils"
+      ]
+    },
     "@zag-js/core@1.18.5": {
       "integrity": "sha512-1ciVFlcYSeCInpabf4F8CXU7J4G8OlERgFSCA8/0CiZASWtl12MHMNNDF9Pf0JodsFsg+wGEaPolUwyBKdQyuw==",
       "dependencies": [
@@ -260,6 +277,12 @@
       "integrity": "sha512-itCRFq2jjAhGI1Zh9+vHwfkd8LI9ACBcAP8SoNj9c+HC53obUP5Z1Wmr9t55RdTkl0hnohiFleqjRQ3qjDyILw==",
       "dependencies": [
         "@zag-js/types"
+      ]
+    },
+    "@zag-js/focus-visible@1.18.5": {
+      "integrity": "sha512-16Qpxeu+ajor4stPioNN23zjTtyTEUjqgODJ2AfXGFCduA/zkn3qBDcXvqHvdh0sFBATstR0NNtftu+vR5bo5g==",
+      "dependencies": [
+        "@zag-js/dom-query"
       ]
     },
     "@zag-js/types@1.18.5": {
@@ -403,13 +426,15 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@zag-js/checkbox@^1.18.5",
       "npm:@zag-js/core@^1.18.5",
-      "npm:@zag-js/utils@^1.18.5",
-      "npm:alpinejs@^3.14.9"
+      "npm:@zag-js/dom-query@^1.18.5",
+      "npm:@zag-js/utils@^1.18.5"
     ],
     "members": {
       "example": {
         "dependencies": [
+          "npm:alpinejs@^3.14.9",
           "npm:vite@^7.0.5"
         ]
       }

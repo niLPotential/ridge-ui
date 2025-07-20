@@ -3,7 +3,28 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Checkbox - Ridge</title>
+    <script type="module" src="./checkbox.ts"></script>
   </head>
-  <body></body>
+  <body>
+    <label
+      x-data="checkbox({id: '1', dir: 'ltr', name: 'name'})"
+      x-bind="root"
+      :id="$id('root')"
+      :for="$id('hidden-input')"
+      @click="(e) => {if (e.target === $refs.hiddenInput) e.stopPropagation()}"
+      x-id="['root', 'label', 'control', 'hidden-input']"
+    >
+      <span x-bind="label" :id="$id('label')">
+        Input is
+        <span x-text="checked ? ' checked' : ' unchecked'"></span>
+      </span>
+      <div x-bind="control" :id="$id('control')"></div>
+      <input
+        x-bind="hiddenInput"
+        :id="$id('hidden-input')"
+        x-ref="hiddenInput"
+      />
+    </label>
+  </body>
 </html>

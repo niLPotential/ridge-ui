@@ -1,8 +1,13 @@
 {
   "workspace": ["example"],
+  "lint": {
+    "rules": { "exclude": ["no-explicit-any"] }
+  },
+  "nodeModulesDir": "auto",
   "imports": {
+    "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.18.5",
     "@zag-js/core": "npm:@zag-js/core@^1.18.5",
-    "@zag-js/utils": "npm:@zag-js/utils@^1.18.5",
-    "alpinejs": "npm:alpinejs@^3.14.9"
+    "@zag-js/dom-query": "npm:@zag-js/dom-query@^1.18.5",
+    "@zag-js/utils": "npm:@zag-js/utils@^1.18.5"
   }
 }
