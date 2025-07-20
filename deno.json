@@ -5,6 +5,7 @@
   },
   "nodeModulesDir": "auto",
   "imports": {
+    "@zag-js/accordion": "npm:@zag-js/accordion@^1.18.5",
     "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.18.5",
     "@zag-js/core": "npm:@zag-js/core@^1.18.5",
     "@zag-js/dom-query": "npm:@zag-js/dom-query@^1.18.5",

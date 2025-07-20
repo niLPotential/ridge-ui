@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@zag-js/accordion@^1.18.5": "1.18.5",
     "npm:@zag-js/checkbox@^1.18.5": "1.18.5",
     "npm:@zag-js/core@^1.18.5": "1.18.5",
     "npm:@zag-js/dom-query@^1.18.5": "1.18.5",
@@ -252,6 +253,16 @@
     "@vue/shared@3.1.5": {
       "integrity": "sha512-oJ4F3TnvpXaQwZJNF3ZK+kLPHKarDmJjJ6jyzVNDKH9md1dptjC7lWR//jrGuLdek/U6iltWxqAnYOu8gCiOvA=="
     },
+    "@zag-js/accordion@1.18.5": {
+      "integrity": "sha512-zgl0LO78G1ozFOBSDZnxhcx8bvJ5Fhcmzz7E3LMFyDPCXjjQoo/YNyluKv9HwrpuCQQvhfKm81pvfeK59W8Lyg==",
+      "dependencies": [
+        "@zag-js/anatomy",
+        "@zag-js/core",
+        "@zag-js/dom-query",
+        "@zag-js/types",
+        "@zag-js/utils"
+      ]
+    },
     "@zag-js/anatomy@1.18.5": {
       "integrity": "sha512-pn7CgXX/O+dLrkz/p3E+GdEXeYZarL8No/QHUODmC8DEP3XCkEA+PYPOX/BZyYFmja+qfT+zHwerzDaaOo3gvA=="
     },
@@ -426,6 +437,7 @@
   },
   "workspace": {
     "dependencies": [
+      "npm:@zag-js/accordion@^1.18.5",
       "npm:@zag-js/checkbox@^1.18.5",
       "npm:@zag-js/core@^1.18.5",
       "npm:@zag-js/dom-query@^1.18.5",

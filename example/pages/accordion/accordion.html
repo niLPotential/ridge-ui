@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion - Ridge</title>
+    <script type="module" src="./accordion.ts"></script>
+  </head>
+  <body>
+    <div x-data="accordion({id: '1', dir: 'ltr'})" x-bind="root">
+      <div x-bind="item({value: '1'})"></div>
+    </div>
+  </body>
+</html>
