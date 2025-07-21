@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angle Slider - Ridge</title>
+    <script type="module" src="./angle-slider.ts"></script>
+    <link rel="stylesheet" href="./angle-slider.css" />
+  </head>
+  <body>
+    <div
+      x-data="angleSlider({id: '1', name: 'slider'})"
+      x-bind="root"
+      x-id="['root', 'hidden-input', 'control', 'thumb', 'value-text']"
+      :id="$id('root')"
+    >
+      <label
+        x-bind="label"
+        :for="$id('hidden-input')"
+        @click="(e) => {
+          if (!interactive) return;
+          e.preventDefault();
+          $refs.thumb.focus();
+        }"
+      >
+        Angle Slider:
+        <div x-bind="valueText" :id="$id('value-text')" x-text="valueAsDegree">
+        </div>
+      </label>
+      <div x-bind="control" :id="$id('control')">
+        <div x-bind="thumb" :id="$id('thumb')" x-ref="thumb"></div>
+        <div x-bind="markerGroup">
+          <template
+            x-for="value in [0, 45, 90, 135, 180, 225, 270, 315]"
+            :key="value"
+          >
+            <div x-bind="marker({ value })"></div>
+          </template>
+        </div>
+      </div>
+      <input x-bind="hiddenInput" :id="$id('hidden-input')" />
+    </div>
+  </body>
+</html>

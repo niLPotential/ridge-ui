@@ -2,6 +2,8 @@
   "version": "5",
   "specifiers": {
     "npm:@zag-js/accordion@^1.19.0": "1.19.0",
+    "npm:@zag-js/anatomy@^1.19.0": "1.19.0",
+    "npm:@zag-js/angle-slider@^1.19.0": "1.19.0",
     "npm:@zag-js/checkbox@^1.19.0": "1.19.0",
     "npm:@zag-js/core@^1.19.0": "1.19.0",
     "npm:@zag-js/dom-query@^1.19.0": "1.19.0",
@@ -266,6 +268,17 @@
     "@zag-js/anatomy@1.19.0": {
       "integrity": "sha512-0sM2sV9Z6jjHMD2LGgjYTL91s7Ud5ih8wtb9BPVftJckdOwtU6tpgEDmWVM7PWf4m1oR/p+h75wjzICDDxcN6Q=="
     },
+    "@zag-js/angle-slider@1.19.0": {
+      "integrity": "sha512-s+mdWGuxMQ4Fc4T/KortQnCEggKddwKr6qy1xURKjEs/dBhy6WWQmEUtGY/fHnFapGz8lgj02e7c17SM5R7PPA==",
+      "dependencies": [
+        "@zag-js/anatomy",
+        "@zag-js/core",
+        "@zag-js/dom-query",
+        "@zag-js/rect-utils",
+        "@zag-js/types",
+        "@zag-js/utils"
+      ]
+    },
     "@zag-js/checkbox@1.19.0": {
       "integrity": "sha512-ERg3nzbLT9+WG83JXXng3IaflnotGpBDhcykJhUHWtNDkWkRwIpHHHDr1eOUiuNhIPL+nHzQ2MGv7rfW7mR/Ug==",
       "dependencies": [
@@ -295,6 +308,9 @@
       "dependencies": [
         "@zag-js/dom-query"
       ]
+    },
+    "@zag-js/rect-utils@1.19.0": {
+      "integrity": "sha512-jIvxR7oi5ocJB84dTpiER2oeINJXZReKkdZjlvTzykA04G6/ObCJmjKHZsSjj8PMTzyFUjjhR1CiEhc3FkcocQ=="
     },
     "@zag-js/types@1.19.0": {
       "integrity": "sha512-4oJPNGO00+fmIElaJayHSW8nuc0Dgb//u639BsHn3GzW1gsekfHcn8ZmNsBBp7yOBhrEBYpe9qp6YpKQYsmFcQ==",
@@ -438,6 +454,8 @@
   "workspace": {
     "dependencies": [
       "npm:@zag-js/accordion@^1.19.0",
+      "npm:@zag-js/anatomy@^1.19.0",
+      "npm:@zag-js/angle-slider@^1.19.0",
       "npm:@zag-js/checkbox@^1.19.0",
       "npm:@zag-js/core@^1.19.0",
       "npm:@zag-js/dom-query@^1.19.0",

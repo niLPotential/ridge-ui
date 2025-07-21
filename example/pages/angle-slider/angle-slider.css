@@ -1,3 +1,9 @@
+* {
+  --colors-bg-subtle: #dddddd;
+  --colors-border-primary-subtle: #000000;
+  --colors-border-bold: red;
+}
+
 [data-scope="angle-slider"][data-part="root"] {
   display: flex;
   flex-direction: column;
