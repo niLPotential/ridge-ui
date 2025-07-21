@@ -7,7 +7,12 @@
     <script type="module" src="./accordion.ts"></script>
   </head>
   <body>
-    <div x-data="accordion({id: '1', dir: 'ltr'})" x-bind="root">
+    <div
+      x-data="accordion({id: '1', dir: 'ltr'})"
+      x-bind="root"
+      :id="$id('root')"
+      x-id="['root', 'item', 'itemContent', 'itemTrigger']"
+    >
       <template
         x-data="{data: [
           {title: 'First Title', content: 'First Content'},
@@ -17,15 +22,23 @@
         x-for="(item, index) in data"
         :key="index"
       >
-        <div x-bind="getItem({value: item.title})">
+        <div x-bind="getItem({value: item.title})" :id="$id('item', index)">
           <h3>
             <button
               x-bind="itemTrigger({value: item.title})"
+              :id="$id('itemTrigger', index)"
+              :aria-controls="$id('itemContent', index)"
+              :data-ownedby="$id('root')"
               x-text="item.title"
             >
             </button>
           </h3>
-          <div x-bind="itemContent({value: item.title})" x-text="item.content">
+          <div
+            x-bind="itemContent({value: item.title})"
+            :id="$id('itemContent', index)"
+            :aria-labelledby="$id('itemTrigger', index)"
+            x-text="item.content"
+          >
           </div>
         </div>
       </template>
