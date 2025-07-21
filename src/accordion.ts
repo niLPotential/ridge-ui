@@ -1,24 +1,10 @@
 import { dataAttr, isSafari } from "@zag-js/dom-query";
-import type { BindableContext, ComputedFn, PropFn } from "@zag-js/core";
 import * as accordion from "@zag-js/accordion";
-import { useMachine } from "./lib/machine.ts";
+import { Component } from "./component.ts";
 
-export class Accordion {
-  private send: (event: any) => void;
-  private context: BindableContext<any>;
-  private prop: PropFn<any>;
-  private computed: ComputedFn<any>;
-
-  constructor(props: Partial<accordion.Props>) {
-    const { send, context, prop, computed, init } = useMachine(
-      accordion.machine,
-      props,
-    );
-    this.send = send;
-    this.context = context;
-    this.prop = prop;
-    this.computed = computed;
-    init();
+export class Accordion extends Component<any> {
+  constructor(userProps: Partial<accordion.Props>) {
+    super(accordion.machine, userProps);
   }
 
   get focusedValue() {

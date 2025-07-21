@@ -1,24 +1,10 @@
 import { dataAttr } from "@zag-js/dom-query";
-import type { BindableContext, ComputedFn, PropFn } from "@zag-js/core";
 import * as checkbox from "@zag-js/checkbox";
-import { useMachine } from "./lib/machine.ts";
+import { Component } from "./component.ts";
 
-export class Checkbox {
-  private send: (event: any) => void;
-  private context: BindableContext<checkbox.Schema>;
-  private prop: PropFn<checkbox.Schema>;
-  private computed: ComputedFn<checkbox.Schema>;
-
-  constructor(props: Partial<checkbox.Props>) {
-    const { send, context, prop, computed, init } = useMachine(
-      checkbox.machine,
-      props,
-    );
-    this.send = send;
-    this.context = context;
-    this.prop = prop;
-    this.computed = computed;
-    init();
+export class Checkbox extends Component<checkbox.Schema> {
+  constructor(userProps: Partial<checkbox.Props>) {
+    super(checkbox.machine, userProps);
   }
 
   get disabled() {
