@@ -1,4 +1,4 @@
-import { dataAttr } from "@zag-js/dom-query";
+import { dataAttr, isSafari } from "@zag-js/dom-query";
 import type { BindableContext, ComputedFn, PropFn } from "@zag-js/core";
 import * as accordion from "@zag-js/accordion";
 import { useMachine } from "./lib/machine.ts";
@@ -63,7 +63,7 @@ export class Accordion {
     };
   }
 
-  item(props: accordion.ItemProps) {
+  getItem(props: accordion.ItemProps) {
     return {
       dir: this.prop("dir"),
       ":data-state": () => this.getExpanded(props) ? "open" : "closed",
@@ -73,12 +73,53 @@ export class Accordion {
     };
   }
 
-  get itemContent() {
+  itemContent(props: accordion.ItemProps) {
+    return {
+      dir: this.prop("dir"),
+      role: "region",
+      ":hidden": () => !this.getExpanded(props),
+      ":data-state": () => this.getExpanded(props) ? "open" : "closed",
+      ":data-focus": () => dataAttr(this.getFocused(props)),
+      ":data-disabled": () => dataAttr(this.getDisabled(props)),
+      "data-orientation": this.prop("orientation"),
+    };
   }
 
-  get itemIndicator() {
+  itemIndicator(props: accordion.ItemProps) {
+    return {
+      dir: this.prop("dir"),
+      "aria-hidden": true,
+      "data-state": this.getExpanded(props) ? "open" : "closed",
+      "data-disabled": dataAttr(this.getDisabled(props)),
+      "data-focus": dataAttr(this.getFocused(props)),
+      "data-orientation": this.prop("orientation"),
+    };
   }
 
-  get itemTrigger() {
+  itemTrigger(props: accordion.ItemProps) {
+    return {
+      type: "button",
+      dir: this.prop("dir"),
+      ":aria-expanded": () => this.getExpanded(props),
+      ":disabled": () => this.getDisabled(props),
+      "data-orientation": this.prop("orientation"),
+      ":aria-disabled": () => this.getDisabled(props),
+      ":data-state": () => this.getExpanded(props) ? "open" : "closed",
+      "@focus": () => {
+        if (this.getDisabled(props)) return;
+        this.send({ type: "TRIGGER.FOCUS", value: props.value });
+      },
+      "@blur": () => {
+        if (this.getDisabled(props)) return;
+        this.send({ type: "TRIGGER.BLUR" });
+      },
+      "@click": (event: any) => {
+        if (this.getDisabled(props)) return;
+        if (isSafari()) {
+          event.currentTarget.focus();
+        }
+        this.send({ type: "TRIGGER.CLICK", value: props.value });
+      },
+    };
   }
 }

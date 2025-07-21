@@ -8,7 +8,27 @@
   </head>
   <body>
     <div x-data="accordion({id: '1', dir: 'ltr'})" x-bind="root">
-      <div x-bind="item({value: '1'})"></div>
+      <template
+        x-data="{data: [
+          {title: 'First Title', content: 'First Content'},
+          {title: 'Second Title', content: 'Second Content'},
+          {title: 'Third Title', content: 'Third Content'}
+        ]}"
+        x-for="(item, index) in data"
+        :key="index"
+      >
+        <div x-bind="getItem({value: item.title})">
+          <h3>
+            <button
+              x-bind="itemTrigger({value: item.title})"
+              x-text="item.title"
+            >
+            </button>
+          </h3>
+          <div x-bind="itemContent({value: item.title})" x-text="item.content">
+          </div>
+        </div>
+      </template>
     </div>
   </body>
 </html>
