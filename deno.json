@@ -4,6 +4,9 @@
     "rules": { "exclude": ["no-explicit-any"] }
   },
   "nodeModulesDir": "auto",
+  "tasks": {
+    "example": "cd ./example && vite"
+  },
   "imports": {
     "@types/alpinejs": "npm:@types/alpinejs@^3.13.11",
     "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.22.1",

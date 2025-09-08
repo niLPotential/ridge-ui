@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.0.5__picomatch@4.0.3",
     "npm:@types/alpinejs@^3.13.11": "3.13.11",
     "npm:@zag-js/accordion@^1.22.1": "1.22.1",
     "npm:@zag-js/anatomy@^1.22.1": "1.22.1",
@@ -14,6 +15,12 @@
     "npm:vite@^7.0.5": "7.0.5_picomatch@4.0.3"
   },
   "npm": {
+    "@deno/vite-plugin@1.0.5_vite@7.0.5__picomatch@4.0.3": {
+      "integrity": "sha512-tLja5n4dyMhcze1NzvSs2iiriBymfBlDCZIrjMTxb9O2ru0gvmV6mn5oBD2teNw5Sd92cj3YJzKwsAs8tMJXlg==",
+      "dependencies": [
+        "vite"
+      ]
+    },
     "@esbuild/aix-ppc64@0.25.7": {
       "integrity": "sha512-uD0kKFHh6ETr8TqEtaAcV+dn/2qnYbH/+8wGEdY70Qf7l1l/jmBUbrmQqwiPKAQE6cOQ7dTj6Xr0HzQDGHyceQ==",
       "os": ["aix"],
@@ -465,6 +472,7 @@
     "members": {
       "example": {
         "dependencies": [
+          "npm:@deno/vite-plugin@^1.0.5",
           "npm:vite@^7.0.5"
         ]
       },
