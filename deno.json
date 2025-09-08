@@ -5,13 +5,13 @@
   },
   "nodeModulesDir": "auto",
   "imports": {
-    "@zag-js/accordion": "npm:@zag-js/accordion@^1.19.0",
-    "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.19.0",
-    "@zag-js/angle-slider": "npm:@zag-js/angle-slider@^1.19.0",
-    "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.19.0",
-    "@zag-js/core": "npm:@zag-js/core@^1.19.0",
-    "@zag-js/dom-query": "npm:@zag-js/dom-query@^1.19.0",
-    "@zag-js/utils": "npm:@zag-js/utils@^1.19.0",
-    "alpinejs": "npm:alpinejs@^3.14.9"
+    "@zag-js/accordion": "npm:@zag-js/accordion@^1.22.1",
+    "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.22.1",
+    "@zag-js/angle-slider": "npm:@zag-js/angle-slider@^1.22.1",
+    "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.22.1",
+    "@zag-js/core": "npm:@zag-js/core@^1.22.1",
+    "@zag-js/dom-query": "npm:@zag-js/dom-query@^1.22.1",
+    "@zag-js/utils": "npm:@zag-js/utils@^1.22.1",
+    "alpinejs": "npm:alpinejs@^3.15.0"
   }
 }
