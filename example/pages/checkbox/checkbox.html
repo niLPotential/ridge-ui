@@ -8,23 +8,20 @@
   </head>
   <body>
     <label
-      x-data="checkbox({id: '1', dir: 'ltr', name: 'name'})"
+      x-data="checkbox({ dir: 'ltr', name: 'name'})"
       x-bind="root"
-      :id="$id('root')"
-      :for="$id('hidden-input')"
-      @click="(e) => {if (e.target === $refs.hiddenInput) e.stopPropagation()}"
-      x-id="['root', 'label', 'control', 'hidden-input']"
+      class="flex flex-row-reverse gap-2 select-none text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
     >
-      <span x-bind="label" :id="$id('label')">
+      <span x-bind="label" x-ref="text">
         Input is
         <span x-text="checked ? ' checked' : ' unchecked'"></span>
       </span>
-      <div x-bind="control" :id="$id('control')"></div>
-      <input
-        x-bind="hiddenInput"
-        :id="$id('hidden-input')"
-        x-ref="hiddenInput"
-      />
+      <div
+        x-bind="control"
+        class="w-24px h-24px rounded-0.275rem border-solid border-2 border-green text-white data-[hover]:bg-grey data-[focus]:(outline-2 outline-solid outline-red outline-offset-2) data-[disabled]:(bg-black border-blue) data-[invalid]:border-yellow data-[state='indeterminate']:(bg-white border-grey text-grey) data-[state='checked']:(bg-red border-red)"
+      >
+      </div>
+      <input x-bind="hiddenInput" />
     </label>
   </body>
 </html>

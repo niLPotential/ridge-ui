@@ -1,18 +1,19 @@
 {
-  "workspace": ["example"],
+  "workspace": ["example", "packages/*"],
   "lint": {
     "rules": { "exclude": ["no-explicit-any"] }
   },
   "nodeModulesDir": "auto",
+  "tasks": {
+    "example": "cd ./example && vite"
+  },
+  "compilerOptions": {
+    "lib": ["dom", "deno.ns"]
+  },
   "imports": {
-    "@zag-js/accordion": "npm:@zag-js/accordion@^1.22.1",
+    "@types/alpinejs": "npm:@types/alpinejs@^3.13.11",
     "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.22.1",
-    "@zag-js/angle-slider": "npm:@zag-js/angle-slider@^1.22.1",
-    "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.22.1",
-    "@zag-js/core": "npm:@zag-js/core@^1.22.1",
-    "@zag-js/dialog": "npm:@zag-js/dialog@^1.22.1",
     "@zag-js/dom-query": "npm:@zag-js/dom-query@^1.22.1",
-    "@zag-js/utils": "npm:@zag-js/utils@^1.22.1",
     "alpinejs": "npm:alpinejs@^3.15.0"
   }
 }

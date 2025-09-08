@@ -3,33 +3,28 @@ import { isFunction } from "@zag-js/utils";
 import Alpine from "alpinejs";
 
 export function bindable<T>(props: () => BindableParams<T>): Bindable<T> {
-  const initial = props().value ?? props().defaultValue;
-
-  if (props().debug) {
-    console.log(`[bindable > ${props().debug}] initial`, initial);
-  }
-
+  const initial = props().defaultValue ?? props().value;
   const eq = props().isEqual ?? Object.is;
 
-  const store = Alpine.reactive({ value: initial as T });
+  const v = Alpine.reactive({ value: initial as T });
 
-  const controlled = { value: props().value !== undefined };
+  const controlled = () => props().value !== undefined;
 
   return {
     initial,
-    ref: store,
+    ref: v,
     get() {
-      return controlled.value ? (props().value as T) : store.value;
+      return controlled() ? (props().value as T) : v.value;
     },
-    set(nextValue: T | ((prev: T) => T)) {
-      const prev = store.value;
-      const next = isFunction(nextValue) ? nextValue(prev) : nextValue;
+    set(val: T | ((prev: T) => T)) {
+      const prev = controlled() ? (props().value as T) : v.value;
+      const next = isFunction(val) ? val(prev) : val;
 
       if (props().debug) {
         console.log(`[bindable > ${props().debug}] setValue`, { next, prev });
       }
 
-      if (!controlled.value) store.value = next;
+      if (!controlled()) v.value = next;
       if (!eq(next, prev)) {
         props().onChange?.(next, prev);
       }

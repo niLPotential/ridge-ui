@@ -1,6 +1,10 @@
 {
-  "tasks": { "dev": "vite" },
+  "tasks": {
+    "unocss": "unocss"
+  },
   "imports": {
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
+    "unocss": "npm:unocss@^66.5.1",
     "vite": "npm:vite@^7.0.5"
   }
 }

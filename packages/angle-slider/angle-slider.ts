@@ -6,7 +6,7 @@ import {
   isLeftClick,
 } from "@zag-js/dom-query";
 import * as angleSlider from "@zag-js/angle-slider";
-import { Component } from "./component.ts";
+import { Component } from "@ridge-ui/lib";
 
 export class AngleSlider extends Component<any> {
   parts: Record<string, AnatomyPart>;

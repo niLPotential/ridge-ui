@@ -1,5 +1,6 @@
+import "virtual:uno.css";
 import Alpine from "alpinejs";
-import { Checkbox } from "../../../src/index.ts";
+import { Checkbox } from "@ridge-ui/checkbox";
 
 // @ts-ignore: Alpine
 globalThis.Alpine = Alpine;

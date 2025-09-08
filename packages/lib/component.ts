@@ -6,7 +6,7 @@ import type {
   MachineSchema,
   PropFn,
 } from "@zag-js/core";
-import { useMachine } from "./lib/machine.ts";
+import { useMachine } from "./machine.ts";
 
 export class Component<T extends MachineSchema> {
   state: Bindable<T["state"]>;

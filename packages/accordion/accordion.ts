@@ -1,6 +1,6 @@
 import { dataAttr, isSafari } from "@zag-js/dom-query";
 import * as accordion from "@zag-js/accordion";
-import { Component } from "./component.ts";
+import { Component } from "@ridge-ui/lib";
 
 export class Accordion extends Component<any> {
   constructor(userProps: Partial<accordion.Props>) {
