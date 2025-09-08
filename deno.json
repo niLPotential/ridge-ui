@@ -5,6 +5,7 @@
   },
   "nodeModulesDir": "auto",
   "imports": {
+    "@types/alpinejs": "npm:@types/alpinejs@^3.13.11",
     "@zag-js/accordion": "npm:@zag-js/accordion@^1.22.1",
     "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.22.1",
     "@zag-js/angle-slider": "npm:@zag-js/angle-slider@^1.22.1",
