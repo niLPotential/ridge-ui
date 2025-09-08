@@ -17,7 +17,7 @@ export function bindable<T>(props: () => BindableParams<T>): Bindable<T> {
       return controlled() ? (props().value as T) : v.value;
     },
     set(val: T | ((prev: T) => T)) {
-      const prev = controlled() ? props().value : v.value;
+      const prev = controlled() ? (props().value as T) : v.value;
       const next = isFunction(val) ? val(prev) : val;
 
       if (props().debug) {
