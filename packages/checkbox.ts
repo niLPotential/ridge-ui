@@ -1,6 +1,6 @@
 import { dataAttr } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
-import { Component } from "./component.ts";
+import { Component } from "@ridge-ui/lib";
 
 export class Checkbox extends Component<checkbox.Schema> {
   constructor(userProps: Partial<checkbox.Props>) {
