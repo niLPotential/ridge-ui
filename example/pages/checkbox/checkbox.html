@@ -10,7 +10,7 @@
     <label
       x-data="checkbox({ dir: 'ltr', name: 'name'})"
       x-bind="root"
-      class="flex flex-row-reverse gap-2 select-none text-lg data-disabled:(cursor-not-allowed opacity-40)"
+      class="flex flex-row-reverse gap-2 select-none text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
     >
       <span x-bind="label" x-ref="text">
         Input is
@@ -18,7 +18,7 @@
       </span>
       <div
         x-bind="control"
-        class="w-24px h-24px rounded-0.275rem border-solid border-2 border-green text-white data-hover:bg-grey data-focus:(outline-2 outline-solid outline-red outline-offset-2) data-disabled:(bg-black border-blue) data-invalid:border-yellow data-[state='indeterminate']:(bg-white border-grey text-grey) data-[state='checked']:(bg-red border-red)"
+        class="w-24px h-24px rounded-0.275rem border-solid border-2 border-green text-white data-[hover]:bg-grey data-[focus]:(outline-2 outline-solid outline-red outline-offset-2) data-[disabled]:(bg-black border-blue) data-[invalid]:border-yellow data-[state='indeterminate']:(bg-white border-grey text-grey) data-[state='checked']:(bg-red border-red)"
       >
       </div>
       <input x-bind="hiddenInput" />
