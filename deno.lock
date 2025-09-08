@@ -459,8 +459,6 @@
     "dependencies": [
       "npm:@types/alpinejs@^3.13.11",
       "npm:@zag-js/anatomy@^1.22.1",
-      "npm:@zag-js/angle-slider@^1.22.1",
-      "npm:@zag-js/checkbox@^1.22.1",
       "npm:@zag-js/core@^1.22.1",
       "npm:@zag-js/dom-query@^1.22.1",
       "npm:@zag-js/utils@^1.22.1",
