@@ -1,3 +1,4 @@
+import "virtual:uno.css";
 import Alpine from "alpinejs";
 import { Checkbox } from "@ridge-ui/checkbox";
 

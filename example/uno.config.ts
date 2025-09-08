@@ -1,3 +1,3 @@
-import { defineConfig, presetMini } from "unocss";
+import { defineConfig, presetMini, transformerVariantGroup } from "unocss";
 
-export default defineConfig({ presets: [presetMini] });
+export default defineConfig({ presets: [presetMini, transformerVariantGroup] });
