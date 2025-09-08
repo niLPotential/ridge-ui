@@ -458,7 +458,6 @@
   "workspace": {
     "dependencies": [
       "npm:@types/alpinejs@^3.13.11",
-      "npm:@zag-js/accordion@^1.22.1",
       "npm:@zag-js/anatomy@^1.22.1",
       "npm:@zag-js/angle-slider@^1.22.1",
       "npm:@zag-js/checkbox@^1.22.1",
@@ -471,6 +470,11 @@
       "example": {
         "dependencies": [
           "npm:vite@^7.0.5"
+        ]
+      },
+      "packages/accordion": {
+        "dependencies": [
+          "npm:@zag-js/accordion@^1.22.1"
         ]
       }
     }
