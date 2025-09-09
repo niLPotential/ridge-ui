@@ -44,7 +44,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     return this.computed("indeterminate");
   }
 
-  private get dataAttrs() {
+  private get dataAttrs(): DataAttrs {
     return {
       ":data-active": () => dataAttr(this.context.get("active")),
       ":data-focus": () => dataAttr(this.focused),
@@ -74,7 +74,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     });
   }
 
-  get root() {
+  get root(): RootProps {
     return {
       ...this.dataAttrs,
       "x-id": () => ["root", "label", "control", "hidden-input"],
@@ -90,10 +90,10 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
         this.send({ type: "CONTEXT.SET", context: { hovered: false } });
       },
       "@click":
-        "$event.target === $refs['hidden-input'] && $event.stopPropagation() ",
+        "$event.target === $refs['hidden-input'] && $event.stopPropagation()",
     };
   }
-  get label() {
+  get label(): LabelProps {
     return {
       ...this.dataAttrs,
       dir: this.prop("dir"),
@@ -101,7 +101,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     };
   }
 
-  get control() {
+  get control(): ControlProps {
     return {
       ...this.dataAttrs,
       dir: this.prop("dir"),
@@ -110,7 +110,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     };
   }
 
-  get indicator() {
+  get indicator(): IndicatorProps {
     return {
       ...this.dataAttrs,
       dir: this.prop("dir"),
@@ -118,7 +118,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     };
   }
 
-  get hiddenInput() {
+  get hiddenInput(): HiddenInputProps {
     return {
       "x-ref": "hidden-input",
       ":id": "$id('hidden-input')",
@@ -154,4 +154,57 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
       },
     };
   }
+}
+
+type Booleanish = boolean | "true" | "false";
+interface DataAttrs {
+  ":data-active": () => Booleanish;
+  ":data-focus": () => Booleanish;
+  ":data-focus-visible": () => Booleanish;
+  ":data-readonly": () => Booleanish;
+  ":data-hover": () => Booleanish;
+  ":data-disabled": () => Booleanish;
+  ":data-state": () => "indeterminate" | "checked" | "unchecked";
+  ":data-invalid": () => Booleanish;
+  ":data-required": () => Booleanish;
+}
+interface RootProps extends DataAttrs {
+  dir: "ltr" | "rtl" | undefined;
+  "x-id": () => ["root", "label", "control", "hidden-input"];
+  ":id": "$id('root')";
+  ":for": "$id('hidden-input')";
+  "@pointermove": () => void;
+  "@pointerleave": () => void;
+  "@click":
+    "$event.target === $refs['hidden-input'] && $event.stopPropagation()";
+}
+interface LabelProps extends DataAttrs {
+  dir: "ltr" | "rtl" | undefined;
+  ":id": "$id('label')";
+}
+interface ControlProps extends DataAttrs {
+  dir: "ltr" | "rtl" | undefined;
+  ":id": "$id('control')";
+  "aria-hidden": true;
+}
+interface IndicatorProps extends DataAttrs {
+  dir: "ltr" | "rtl" | undefined;
+  ":hidden": () => boolean;
+}
+interface HiddenInputProps {
+  "x-ref": "hidden-input";
+  ":id": "$id('hidden-input')";
+  type: "checkbox";
+  ":required": () => boolean | undefined;
+  ":defaultChecked": () => boolean;
+  ":disabled": () => boolean | undefined;
+  ":aria-labelledby": "$id('label')";
+  ":aria-invalid": () => boolean | undefined;
+  name: string | undefined;
+  form: string | undefined;
+  value: string | undefined;
+  ":style": () => typeof visuallyHiddenStyle;
+  "@focus": () => void;
+  "@blur": () => void;
+  "@click": (event: any) => void;
 }
