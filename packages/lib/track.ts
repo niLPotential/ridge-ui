@@ -8,7 +8,7 @@ function access(value: any) {
 
 /**
  * Inspired by Zag's svelte implementation.
- * 
+ *
  * @param deps Dependencies to track
  * @param effect Effect to trigger when deps change
  */
