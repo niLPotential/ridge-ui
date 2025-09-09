@@ -100,8 +100,6 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
       getEvent: this.getEvent.bind(this),
     });
 
-    // subscribe to context changes?
-
     // context function
     this.ctx = {
       get(key) {
@@ -171,8 +169,8 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
         this.action(machine.states[nextState]?.entry);
       },
     }));
-    // this.cleanups.push(subscribe(this.state.ref, () => this.notify()))
   }
+
   send(event: any) {
     if (this.status !== MachineStatus.Started) return;
 
@@ -211,7 +209,7 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     }
   }
 
-  private action(keys: ActionsOrFn<T> | undefined) {
+  private action = (keys: ActionsOrFn<T> | undefined) => {
     const strs = isFunction(keys) ? keys(this.getParams()) : keys;
     if (!strs) return;
     const fns = strs.map((s) => {
@@ -226,14 +224,14 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     for (const fn of fns) {
       fn?.(this.getParams());
     }
-  }
+  };
 
-  private guard(str: T["guard"] | GuardFn<T>) {
+  private guard = (str: T["guard"] | GuardFn<T>) => {
     if (isFunction(str)) return str(this.getParams());
     return this.machine.implementations?.guards?.[str](this.getParams());
-  }
+  };
 
-  private effect(keys: EffectsOrFn<T> | undefined) {
+  private effect = (keys: EffectsOrFn<T> | undefined) => {
     const strs = isFunction(keys) ? keys(this.getParams()) : keys;
     if (!strs) return;
     const fns = strs.map((s) => {
@@ -251,7 +249,7 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
       if (cleanup) cleanups.push(cleanup);
     }
     return () => cleanups.forEach((fn) => fn?.());
-  }
+  };
 
   private choose: ChooseFn<T> = (transitions) => {
     return toArray(transitions).find((t) => {
@@ -266,7 +264,7 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     this.status = MachineStatus.Started;
     this.debug("initializing...");
     this.state.invoke(this.state.initial, INIT_STATE);
-    // machine.watch?.(getParams());
+    // this.machine.watch?.(this.getParams());
   }
 
   destroy() {
