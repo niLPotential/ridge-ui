@@ -57,28 +57,16 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     return this.ctx;
   }
 
-  get state(): {
+  get state(): Bindable<T["state"]> & {
     matches: (...values: T["state"][]) => boolean;
     hasTag: (tag: T["tag"]) => boolean;
-    initial: T["state"] | undefined;
-    ref: any;
-    get: () => T["state"];
-    set(value: import("@zag-js/core").ValueOrFn<T["state"]>): void;
-    invoke(nextValue: T["state"], prevValue: T["state"]): void;
-    hash(value: T["state"]): string;
   } {
     return this.getState();
   }
 
-  private getState(): {
+  private getState(): Bindable<T["state"]> & {
     matches: (...values: T["state"][]) => boolean;
     hasTag: (tag: T["tag"]) => boolean;
-    initial: T["state"] | undefined;
-    ref: any;
-    get: () => T["state"];
-    set(value: import("@zag-js/core").ValueOrFn<T["state"]>): void;
-    invoke(nextValue: T["state"], prevValue: T["state"]): void;
-    hash(value: T["state"]): string;
   } {
     return {
       ...this._state,
