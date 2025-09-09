@@ -29,7 +29,9 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
         _src.module.map((s, i) => <script type="module" src={s} key={i} />)
       )}
       {src.module.map((_src, i) => <script type="module" src={_src} key={i} />)}
-      {src.preload.map((href, i) => <link rel="preload" href={href} key={i} />)}
+      {src.preload.map((href, i) => (
+        <link rel="modulepreload" crossorigin="" href={href} key={i} />
+      ))}
       {src.style.map((href, i) => (
         <link rel="stylesheet" href={href} key={i} />
       ))}
