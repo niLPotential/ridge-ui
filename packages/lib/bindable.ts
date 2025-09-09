@@ -2,6 +2,13 @@ import type { Bindable, BindableParams } from "@zag-js/core";
 import { isFunction } from "@zag-js/utils";
 import Alpine from "alpinejs";
 
+/**
+ * Makes value reactive by Alpine.js.
+ * Inspired by Zag's vanilla-ts example and vue implementation.
+ *
+ * @param props To be reactive by Alpine.js
+ * @returns Zag `Bindable` object
+ */
 export function bindable<T>(props: () => BindableParams<T>): Bindable<T> {
   const initial = props().defaultValue ?? props().value;
   const eq = props().isEqual ?? Object.is;

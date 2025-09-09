@@ -6,6 +6,12 @@ function access(value: any) {
   return value;
 }
 
+/**
+ * Inspired by Zag's svelte implementation.
+ * 
+ * @param deps Dependencies to track
+ * @param effect Effect to trigger when deps change
+ */
 export const track = (deps: any[], effect: VoidFunction) => {
   let prevDeps: any[] = [];
   let isFirstRun = true;
