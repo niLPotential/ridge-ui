@@ -7,7 +7,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     super(checkbox.machine, userProps);
   }
 
-  get disabled() {
+  get disabled(): boolean | undefined {
     return this.prop("disabled");
   }
   private get readOnly() {
@@ -20,20 +20,20 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     return this.prop("invalid");
   }
 
-  get focused() {
+  get focused(): boolean {
     return !this.disabled && this.context.get("focused");
   }
   private get focusVisible() {
     return !this.disabled && this.context.get("focusVisible");
   }
 
-  get checked() {
+  get checked(): boolean {
     return this.computed("checked");
   }
-  get checkedState() {
+  get checkedState(): boolean {
     return this.checked;
   }
-  get indeterminate() {
+  get indeterminate(): boolean {
     return this.computed("indeterminate");
   }
 
