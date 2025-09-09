@@ -1,5 +1,5 @@
 {
-  "workspace": ["example", "website", "packages/*"],
+  "workspace": ["website", "packages/*"],
   "lint": {
     "rules": { "exclude": ["no-explicit-any"] }
   },

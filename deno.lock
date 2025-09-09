@@ -1191,13 +1191,6 @@
       "npm:alpinejs@^3.15.0"
     ],
     "members": {
-      "example": {
-        "dependencies": [
-          "npm:@deno/vite-plugin@^1.0.5",
-          "npm:unocss@^66.5.1",
-          "npm:vite@^7.1.5"
-        ]
-      },
       "packages/accordion": {
         "dependencies": [
           "npm:@zag-js/accordion@^1.22.1"
