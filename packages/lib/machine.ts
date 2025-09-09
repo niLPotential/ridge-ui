@@ -45,23 +45,41 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     };
   }
 
-  get event() {
+  get event(): any {
     return this.getEvent();
   }
 
-  getStatus() {
+  getStatus(): MachineStatus {
     return this.status;
   }
 
-  get context() {
+  get context(): BindableContext<T> {
     return this.ctx;
   }
 
-  get state() {
+  get state(): {
+    matches: (...values: T["state"][]) => boolean;
+    hasTag: (tag: T["tag"]) => boolean;
+    initial: T["state"] | undefined;
+    ref: any;
+    get: () => T["state"];
+    set(value: import("@zag-js/core").ValueOrFn<T["state"]>): void;
+    invoke(nextValue: T["state"], prevValue: T["state"]): void;
+    hash(value: T["state"]): string;
+  } {
     return this.getState();
   }
 
-  private getState() {
+  private getState(): {
+    matches: (...values: T["state"][]) => boolean;
+    hasTag: (tag: T["tag"]) => boolean;
+    initial: T["state"] | undefined;
+    ref: any;
+    get: () => T["state"];
+    set(value: import("@zag-js/core").ValueOrFn<T["state"]>): void;
+    invoke(nextValue: T["state"], prevValue: T["state"]): void;
+    hash(value: T["state"]): string;
+  } {
     return {
       ...this._state,
       matches: (...values: T["state"][]) => values.includes(this._state.get()),
