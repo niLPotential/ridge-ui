@@ -249,9 +249,9 @@ export function useMachine<T extends MachineSchema>(
     const currentState = state.get();
 
     const transitions =
-      // @ts-ignore
+      // @ts-ignore transition
       machine.states[currentState].on?.[_event.type] ??
-        // @ts-ignore
+        // @ts-ignore transition
         machine.on?.[_event.type];
 
     const _transition = choose(transitions);
