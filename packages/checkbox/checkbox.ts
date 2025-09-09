@@ -2,6 +2,13 @@ import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
 import { AlpineMachine } from "@ridge-ui/lib";
 
+/**
+ * Ridge UI checkbox component
+ *
+ * ```ts
+ * Alpine.data("checkbox", (userProps: any) => new Checkbox(userProps));
+ * ```
+ */
 export class Checkbox extends AlpineMachine<checkbox.Schema> {
   constructor(userProps: Partial<checkbox.Props>) {
     super(checkbox.machine, userProps);

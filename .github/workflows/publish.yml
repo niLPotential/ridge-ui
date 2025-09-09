@@ -15,5 +15,7 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-      - name: Publish package
+      - name: Publish lib
         run: deno publish -c ./packages/lib/deno.json
+      - name: Publish checkbox
+        run: deno publish -c ./packages/checkbox/deno.json

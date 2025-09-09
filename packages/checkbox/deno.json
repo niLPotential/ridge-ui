@@ -1,6 +1,6 @@
 {
   "name": "@ridge-ui/checkbox",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "exports": "./mod.ts",
   "imports": {
     "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.22.1"
