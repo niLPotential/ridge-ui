@@ -12,11 +12,11 @@ export default function CheckBoxDemo() {
       <label
         x-data="checkbox(props)"
         x-bind="root"
-        class="flex flex-row gap-2 select-none text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
+        class="flex flex-row select-none gap-2 text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
       >
         <div
           x-bind="control"
-          class="w-24px h-24px rounded-0.275rem border-solid border-2 border-blue text-white data-[hover]:bg-gray data-[focus]:(outline-2 outline-solid outline-blue outline-offset-2) data-[disabled]:(bg-black border-black) data-[invalid]:border-red data-[state=indeterminate]:(bg-white border-yellow text-yellow) data-[state=checked]:(bg-blue border-blue)"
+          class="h-24px w-24px border-2 border-blue rounded-0.275rem border-solid text-white data-[disabled]:(border-black bg-black) data-[invalid]:border-red data-[state=checked]:(border-blue bg-blue) data-[state=indeterminate]:(border-yellow bg-white text-yellow) data-[hover]:bg-gray data-[focus]:(outline-2 outline-blue outline-offset-2 outline-solid)"
         >
         </div>
         <span x-bind="label">
