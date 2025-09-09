@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@hono/hono/jsx"
+  },
+  "imports": {
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
+    "@hono/hono": "jsr:@hono/hono@^4.9.6",
+    "domco": "npm:domco@^4.3.1",
+    "unocss": "npm:unocss@^66.5.1",
+    "vite": "npm:vite@^7.1.5"
+  }
+}

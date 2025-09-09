@@ -1,11 +1,11 @@
 {
-  "workspace": ["example", "packages/*"],
+  "workspace": ["example", "website", "packages/*"],
   "lint": {
     "rules": { "exclude": ["no-explicit-any"] }
   },
   "nodeModulesDir": "auto",
   "tasks": {
-    "example": "cd ./example && vite"
+    "website": "cd ./website && vite"
   },
   "compilerOptions": {
     "lib": ["dom", "deno.ns"]
