@@ -1,8 +1,8 @@
 import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
-import { Component } from "@ridge-ui/lib";
+import { AlpineMachine } from "@ridge-ui/lib";
 
-export class Checkbox extends Component<checkbox.Schema> {
+export class Checkbox extends AlpineMachine<checkbox.Schema> {
   constructor(userProps: Partial<checkbox.Props>) {
     super(checkbox.machine, userProps);
   }
