@@ -7,7 +7,7 @@
   "tasks": {
     "website": "cd ./website && vite",
     "website:build": "cd ./website && vite build",
-    "website:preview": "cd ./website && deno serve ./dist/server/app.js"
+    "website:preview": "cd ./website && deno serve --allow-read ./dist/server/app.js"
   },
   "compilerOptions": {
     "lib": ["dom", "deno.ns"]
