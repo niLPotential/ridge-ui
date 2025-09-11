@@ -1,4 +1,9 @@
 {
+  "tasks": {
+    "vite": "vite",
+    "build": "vite build",
+    "ssg": "deno task build && deno --allow-write ./ssg.ts"
+  },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "@hono/hono/jsx"

@@ -6,9 +6,10 @@
   "nodeModulesDir": "auto",
   "tasks": {
     "website": "cd ./website && vite",
-    "website:build": "cd ./website && vite build",
+    "website:build": "cd ./website && deno task build",
     "website:preview": "cd ./website && deno serve --allow-read ./dist/server/app.js",
-    "website:fix": "cd ./website && eslint src/server --fix"
+    "website:fix": "cd ./website && eslint src/server --fix",
+    "website:ssg": "cd ./website && deno task ssg"
   },
   "compilerOptions": {
     "lib": ["dom", "deno.ns"]
