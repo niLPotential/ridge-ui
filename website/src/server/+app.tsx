@@ -12,7 +12,7 @@ declare module "@hono/hono" {
       content: string | Promise<string>,
       props: {
         title: string;
-        srcs: Src[];
+        srcs?: Src[];
       },
     ): Response;
   }
@@ -25,7 +25,7 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
     <head>
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      {srcs.map((_src) =>
+      {srcs?.map((_src) =>
         _src.module.map((s, i) => <script type="module" src={s} key={i} />)
       )}
       {src.module.map((_src, i) => <script type="module" src={_src} key={i} />)}
@@ -43,7 +43,13 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
   </html>
 )));
 
-app.get("/", (c) => c.redirect("checkbox"));
+app.get("/", (c) =>
+  c.render(
+    <div>
+      <a href="/checkbox">checkbox</a>
+    </div>,
+    { title: "Home" },
+  ));
 app.get(
   "/checkbox",
   (c) =>
