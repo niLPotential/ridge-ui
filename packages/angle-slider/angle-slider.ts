@@ -1,4 +1,3 @@
-import type { AnatomyPart } from "@zag-js/anatomy";
 import {
   dataAttr,
   getEventPoint,
@@ -6,18 +5,16 @@ import {
   isLeftClick,
 } from "@zag-js/dom-query";
 import * as angleSlider from "@zag-js/angle-slider";
-import { Component } from "@ridge-ui/lib";
+import { AlpineMachine } from "@ridge-ui/lib";
 
-export class AngleSlider extends Component<any> {
-  parts: Record<string, AnatomyPart>;
+const parts = angleSlider.anatomy.build();
 
+export class AngleSlider extends AlpineMachine<any> {
   constructor(userProps: Partial<angleSlider.Props>) {
     super(angleSlider.machine, userProps);
-    this.parts = angleSlider.anatomy.build();
   }
 
   get dragging() {
-    // @ts-ignore: matches
     return this.state.matches("dragging");
   }
 
@@ -47,7 +44,9 @@ export class AngleSlider extends Component<any> {
 
   get root() {
     return {
-      ...this.parts.root.attrs,
+      ...parts.root.attrs,
+      "x-id": () => ["root", "hidden-input", "control", "thumb", "value-text"],
+      ":id": "$id('root')",
       ":data-disabled": () => dataAttr(this.disabled),
       ":data-invalid": () => dataAttr(this.invalid),
       ":data-readonly": () => dataAttr(this.readOnly),
@@ -60,10 +59,13 @@ export class AngleSlider extends Component<any> {
 
   get label() {
     return {
-      ...this.parts.label.attrs,
+      ...parts.label.attrs,
+      ":for": "$id{'hidden-input}",
       ":data-disabled": () => dataAttr(this.disabled),
       ":data-invalid": () => dataAttr(this.invalid),
       ":data-readonly": () => dataAttr(this.readOnly),
+      "@click": this.interactive &&
+        "$event.preventDefault(); $refs.thumb.focus()",
     };
   }
 
@@ -72,13 +74,15 @@ export class AngleSlider extends Component<any> {
       type: "hidden",
       value: this.value,
       name: this.prop("name"),
+      ":id": "$id('hidden-input')",
     };
   }
 
   get control() {
     return {
-      ...this.parts.control.attrs,
+      ...parts.control.attrs,
       role: "presentation",
+      ":id": "$id('control')",
       ":data-disabled": () => dataAttr(this.disabled),
       ":data-invalid": () => dataAttr(this.invalid),
       ":data-readonly": () => dataAttr(this.readOnly),
@@ -101,7 +105,9 @@ export class AngleSlider extends Component<any> {
 
   get thumb() {
     return {
-      ...this.parts.thumb.attrs,
+      ...parts.thumb.attrs,
+      "x-ref": "thumb",
+      ":id": "$id('thumb')",
       role: "slider",
       "aria-valuemax": 360,
       "aria-valuemin": 0,
@@ -118,6 +124,7 @@ export class AngleSlider extends Component<any> {
       },
       "@keydown": (event: any) => {
         if (!this.interactive) return;
+
         const step = getEventStep(event) * this.prop("step");
 
         switch (event.key) {
@@ -150,18 +157,20 @@ export class AngleSlider extends Component<any> {
   }
   get valueText() {
     return {
-      ...this.parts.valueText.attrs,
+      ...parts.valueText.attrs,
+      ":id": "$id('value-text')",
     };
   }
 
   get markerGroup() {
     return {
-      ...this.parts.markerGroup.attrs,
+      ...parts.markerGroup.attrs,
     };
   }
-  marker = (props: angleSlider.MarkerProps) => ({
-    ...this.parts.marker.attrs,
-    "data-value": props.value,
+
+  marker = (props: { value: number }) => ({
+    ...parts.marker.attrs,
+    ":data-value": () => props.value,
     ":data-state": () =>
       props.value < this.value
         ? "under-value"
