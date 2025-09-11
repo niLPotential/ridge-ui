@@ -61,7 +61,14 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
 app.get("/", (c) =>
   c.render(
     <div>
-      <a href="./checkbox">checkbox</a>
+      <ul>
+        <li>
+          <a href="./checkbox/">checkbox</a>
+        </li>
+        <li>
+          <a href="./angle-slider/">angle slider</a>
+        </li>
+      </ul>
     </div>,
     { title: "Home" },
   ));
