@@ -16,7 +16,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v4
         with:
-          path: ./website/dist/client
+          path: ./website/dist/client/
   deploy:
     needs: build
     permissions:
