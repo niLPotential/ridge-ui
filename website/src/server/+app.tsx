@@ -20,6 +20,8 @@ declare module "@hono/hono" {
 
 const app = new Hono();
 
+const base = import.meta.env.MODE === "production" ? "/ridge-ui" : "";
+
 app.use(jsxRenderer(({ children, title, srcs }) => (
   <html lang="en">
     <head>
@@ -27,22 +29,22 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       {srcs?.map((_src) =>
         _src.module.map((s, i) => (
-          <script type="module" src={"/ridge-ui" + s} key={i} />
+          <script type="module" src={base + s} key={i} />
         ))
       )}
       {src.module.map((_src, i) => (
-        <script type="module" src={"/ridge-ui" + _src} key={i} />
+        <script type="module" src={base + _src} key={i} />
       ))}
       {src.preload.map((href, i) => (
         <link
           rel="modulepreload"
           crossorigin=""
-          href={"/ridge-ui" + href}
+          href={base + href}
           key={i}
         />
       ))}
       {src.style.map((href, i) => (
-        <link rel="stylesheet" href={"/ridge-ui" + href} key={i} />
+        <link rel="stylesheet" href={base + href} key={i} />
       ))}
       <title>{title} - Ridge UI</title>
     </head>
