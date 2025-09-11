@@ -3,8 +3,12 @@ import { Hono } from "@hono/hono";
 import { jsxRenderer } from "@hono/hono/jsx-renderer";
 
 import { src } from "client:script";
+
 import { src as checkboxSrc } from "client:script/checkbox";
-import CheckBoxDemo from "./components/checkbox.tsx";
+import CheckboxDemo from "./components/checkbox.tsx";
+
+import { src as angleSliderSrc } from "client:script/angleSlider";
+import AngleSliderDemo from "./components/angleSlider.tsx";
 
 declare module "@hono/hono" {
   interface ContextRenderer {
@@ -64,9 +68,17 @@ app.get("/", (c) =>
 app.get(
   "/checkbox/",
   (c) =>
-    c.render(<CheckBoxDemo />, {
+    c.render(<CheckboxDemo />, {
       title: "Checkbox",
       srcs: [checkboxSrc],
+    }),
+);
+app.get(
+  "/angle-slider/",
+  (c) =>
+    c.render(<AngleSliderDemo />, {
+      title: "Angle Slider",
+      srcs: [angleSliderSrc],
     }),
 );
 

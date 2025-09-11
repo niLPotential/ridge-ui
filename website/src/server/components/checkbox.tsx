@@ -1,4 +1,4 @@
-export default function CheckBoxDemo() {
+export default function CheckboxDemo() {
   return (
     <div x-data="{props: {disabled: false, invalid: false}}">
       <div>
