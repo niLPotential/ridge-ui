@@ -13,5 +13,6 @@
  * @module
  */
 
+export type { AnatomyPartAttrs } from "./types.ts";
 export { mergeProps } from "@zag-js/core";
 export { AlpineMachine } from "./machine.ts";

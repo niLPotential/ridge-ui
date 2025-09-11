@@ -1,6 +1,8 @@
 import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
-import { AlpineMachine } from "@ridge-ui/lib";
+import { AlpineMachine, type AnatomyPartAttrs } from "@ridge-ui/lib";
+
+const parts = checkbox.anatomy.build();
 
 /**
  * Ridge UI checkbox component
@@ -76,6 +78,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
 
   get root(): RootProps {
     return {
+      ...parts.root.attrs,
       ...this.dataAttrs,
       "x-id": () => ["root", "label", "control", "hidden-input"],
       dir: this.prop("dir"),
@@ -95,6 +98,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
   }
   get label(): LabelProps {
     return {
+      ...parts.label.attrs,
       ...this.dataAttrs,
       dir: this.prop("dir"),
       ":id": "$id('label')",
@@ -103,6 +107,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
 
   get control(): ControlProps {
     return {
+      ...parts.control.attrs,
       ...this.dataAttrs,
       dir: this.prop("dir"),
       ":id": "$id('control')",
@@ -112,6 +117,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
 
   get indicator(): IndicatorProps {
     return {
+      ...parts.indicator.attrs,
       ...this.dataAttrs,
       dir: this.prop("dir"),
       ":hidden": () => !this.indeterminate && !this.checked,
@@ -168,7 +174,7 @@ interface DataAttrs {
   ":data-invalid": () => Booleanish;
   ":data-required": () => Booleanish;
 }
-interface RootProps extends DataAttrs {
+interface RootProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
   "x-id": () => ["root", "label", "control", "hidden-input"];
   ":id": "$id('root')";
@@ -178,16 +184,16 @@ interface RootProps extends DataAttrs {
   "@click":
     "$event.target === $refs['hidden-input'] && $event.stopPropagation()";
 }
-interface LabelProps extends DataAttrs {
+interface LabelProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
   ":id": "$id('label')";
 }
-interface ControlProps extends DataAttrs {
+interface ControlProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
   ":id": "$id('control')";
   "aria-hidden": true;
 }
-interface IndicatorProps extends DataAttrs {
+interface IndicatorProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
   ":hidden": () => boolean;
 }
