@@ -10,7 +10,6 @@
   },
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
-    "@eslint/js": "npm:@eslint/js@^9.35.0",
     "@hono/hono": "jsr:@hono/hono@^4.9.6",
     "@unocss/eslint-config": "npm:@unocss/eslint-config@^66.5.1",
     "domco": "npm:domco@^4.3.1",

@@ -2,10 +2,8 @@
   "version": "5",
   "specifiers": {
     "jsr:@hono/hono@^4.9.6": "4.9.6",
-    "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
-    "npm:@eslint/js@^9.35.0": "9.35.0",
+    "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.1.5__picomatch@4.0.3",
     "npm:@types/alpinejs@^3.13.11": "3.13.11",
-    "npm:@types/node@*": "24.2.0",
     "npm:@unocss/eslint-config@^66.5.1": "66.5.1_eslint@9.35.0",
     "npm:@zag-js/accordion@^1.22.1": "1.22.1",
     "npm:@zag-js/anatomy@^1.22.1": "1.22.1",
@@ -15,13 +13,11 @@
     "npm:@zag-js/dom-query@^1.22.1": "1.22.1",
     "npm:@zag-js/utils@^1.22.1": "1.22.1",
     "npm:alpinejs@^3.15.0": "3.15.0",
-    "npm:domco@^4.3.1": "4.3.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
-    "npm:eslint@9.35.0": "9.35.0",
+    "npm:domco@^4.3.1": "4.3.1_vite@7.1.5__picomatch@4.0.3",
     "npm:eslint@^9.35.0": "9.35.0",
     "npm:typescript-eslint@^8.43.0": "8.43.0_eslint@9.35.0_typescript@5.9.2_@typescript-eslint+parser@8.43.0__eslint@9.35.0__typescript@5.9.2",
-    "npm:unocss@^66.5.1": "66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
-    "npm:vite@7.1.5": "7.1.5_picomatch@4.0.3_@types+node@24.2.0",
-    "npm:vite@^7.1.5": "7.1.5_picomatch@4.0.3_@types+node@24.2.0"
+    "npm:unocss@^66.5.1": "66.5.1_vite@7.1.5__picomatch@4.0.3",
+    "npm:vite@^7.1.5": "7.1.5_picomatch@4.0.3"
   },
   "jsr": {
     "@hono/hono@4.9.6": {
@@ -107,13 +103,7 @@
     "@deno/vite-plugin@1.0.5_vite@7.1.5__picomatch@4.0.3": {
       "integrity": "sha512-tLja5n4dyMhcze1NzvSs2iiriBymfBlDCZIrjMTxb9O2ru0gvmV6mn5oBD2teNw5Sd92cj3YJzKwsAs8tMJXlg==",
       "dependencies": [
-        "vite@7.1.5_picomatch@4.0.3"
-      ]
-    },
-    "@deno/vite-plugin@1.0.5_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0": {
-      "integrity": "sha512-tLja5n4dyMhcze1NzvSs2iiriBymfBlDCZIrjMTxb9O2ru0gvmV6mn5oBD2teNw5Sd92cj3YJzKwsAs8tMJXlg==",
-      "dependencies": [
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "@esbuild/aix-ppc64@0.25.9": {
@@ -502,21 +492,15 @@
     "@types/json-schema@7.0.15": {
       "integrity": "sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA=="
     },
-    "@types/node@24.2.0": {
-      "integrity": "sha512-3xyG3pMCq3oYCNg7/ZP+E1ooTaGB4cG8JWRsqqOYQdbWNY4zbaV0Ennrd7stjiJEFZCaybcIgpTjJWHRfBSIDw==",
-      "dependencies": [
-        "undici-types"
-      ]
-    },
     "@typescript-eslint/eslint-plugin@8.43.0_@typescript-eslint+parser@8.43.0__eslint@9.35.0__typescript@5.9.2_eslint@9.35.0_typescript@5.9.2": {
       "integrity": "sha512-8tg+gt7ENL7KewsKMKDHXR1vm8tt9eMxjJBYINf6swonlWgkYn5NwyIgXpbbDxTNU5DgpDFfj95prcTq2clIQQ==",
       "dependencies": [
         "@eslint-community/regexpp",
         "@typescript-eslint/parser",
-        "@typescript-eslint/scope-manager@8.43.0",
+        "@typescript-eslint/scope-manager",
         "@typescript-eslint/type-utils",
-        "@typescript-eslint/utils@8.43.0_eslint@9.35.0_typescript@5.9.2",
-        "@typescript-eslint/visitor-keys@8.43.0",
+        "@typescript-eslint/utils",
+        "@typescript-eslint/visitor-keys",
         "eslint",
         "graphemer",
         "ignore@7.0.5",
@@ -528,51 +512,29 @@
     "@typescript-eslint/parser@8.43.0_eslint@9.35.0_typescript@5.9.2": {
       "integrity": "sha512-B7RIQiTsCBBmY+yW4+ILd6mF5h1FUwJsVvpqkrgpszYifetQ2Ke+Z4u6aZh0CblkUGIdR59iYVyXqqZGkZ3aBw==",
       "dependencies": [
-        "@typescript-eslint/scope-manager@8.43.0",
-        "@typescript-eslint/types@8.43.0",
-        "@typescript-eslint/typescript-estree@8.43.0_typescript@5.9.2",
-        "@typescript-eslint/visitor-keys@8.43.0",
+        "@typescript-eslint/scope-manager",
+        "@typescript-eslint/types",
+        "@typescript-eslint/typescript-estree",
+        "@typescript-eslint/visitor-keys",
         "debug",
         "eslint",
-        "typescript"
-      ]
-    },
-    "@typescript-eslint/project-service@8.42.0_typescript@5.9.2": {
-      "integrity": "sha512-vfVpLHAhbPjilrabtOSNcUDmBboQNrJUiNAGoImkZKnMjs2TIcWG33s4Ds0wY3/50aZmTMqJa6PiwkwezaAklg==",
-      "dependencies": [
-        "@typescript-eslint/tsconfig-utils@8.42.0_typescript@5.9.2",
-        "@typescript-eslint/types@8.42.0",
-        "debug",
         "typescript"
       ]
     },
     "@typescript-eslint/project-service@8.43.0_typescript@5.9.2": {
       "integrity": "sha512-htB/+D/BIGoNTQYffZw4uM4NzzuolCoaA/BusuSIcC8YjmBYQioew5VUZAYdAETPjeed0hqCaW7EHg+Robq8uw==",
       "dependencies": [
-        "@typescript-eslint/tsconfig-utils@8.43.0_typescript@5.9.2",
-        "@typescript-eslint/types@8.43.0",
+        "@typescript-eslint/tsconfig-utils",
+        "@typescript-eslint/types",
         "debug",
         "typescript"
-      ]
-    },
-    "@typescript-eslint/scope-manager@8.42.0": {
-      "integrity": "sha512-51+x9o78NBAVgQzOPd17DkNTnIzJ8T/O2dmMBLoK9qbY0Gm52XJcdJcCl18ExBMiHo6jPMErUQWUv5RLE51zJw==",
-      "dependencies": [
-        "@typescript-eslint/types@8.42.0",
-        "@typescript-eslint/visitor-keys@8.42.0"
       ]
     },
     "@typescript-eslint/scope-manager@8.43.0": {
       "integrity": "sha512-daSWlQ87ZhsjrbMLvpuuMAt3y4ba57AuvadcR7f3nl8eS3BjRc8L9VLxFLk92RL5xdXOg6IQ+qKjjqNEimGuAg==",
       "dependencies": [
-        "@typescript-eslint/types@8.43.0",
-        "@typescript-eslint/visitor-keys@8.43.0"
-      ]
-    },
-    "@typescript-eslint/tsconfig-utils@8.42.0_typescript@5.9.2": {
-      "integrity": "sha512-kHeFUOdwAJfUmYKjR3CLgZSglGHjbNTi1H8sTYRYV2xX6eNz4RyJ2LIgsDLKf8Yi0/GL1WZAC/DgZBeBft8QAQ==",
-      "dependencies": [
-        "typescript"
+        "@typescript-eslint/types",
+        "@typescript-eslint/visitor-keys"
       ]
     },
     "@typescript-eslint/tsconfig-utils@8.43.0_typescript@5.9.2": {
@@ -584,61 +546,31 @@
     "@typescript-eslint/type-utils@8.43.0_eslint@9.35.0_typescript@5.9.2": {
       "integrity": "sha512-qaH1uLBpBuBBuRf8c1mLJ6swOfzCXryhKND04Igr4pckzSEW9JX5Aw9AgW00kwfjWJF0kk0ps9ExKTfvXfw4Qg==",
       "dependencies": [
-        "@typescript-eslint/types@8.43.0",
-        "@typescript-eslint/typescript-estree@8.43.0_typescript@5.9.2",
-        "@typescript-eslint/utils@8.43.0_eslint@9.35.0_typescript@5.9.2",
+        "@typescript-eslint/types",
+        "@typescript-eslint/typescript-estree",
+        "@typescript-eslint/utils",
         "debug",
         "eslint",
         "ts-api-utils",
         "typescript"
       ]
-    },
-    "@typescript-eslint/types@8.42.0": {
-      "integrity": "sha512-LdtAWMiFmbRLNP7JNeY0SqEtJvGMYSzfiWBSmx+VSZ1CH+1zyl8Mmw1TT39OrtsRvIYShjJWzTDMPWZJCpwBlw=="
     },
     "@typescript-eslint/types@8.43.0": {
       "integrity": "sha512-vQ2FZaxJpydjSZJKiSW/LJsabFFvV7KgLC5DiLhkBcykhQj8iK9BOaDmQt74nnKdLvceM5xmhaTF+pLekrxEkw=="
     },
-    "@typescript-eslint/typescript-estree@8.42.0_typescript@5.9.2": {
-      "integrity": "sha512-ku/uYtT4QXY8sl9EDJETD27o3Ewdi72hcXg1ah/kkUgBvAYHLwj2ofswFFNXS+FL5G+AGkxBtvGt8pFBHKlHsQ==",
-      "dependencies": [
-        "@typescript-eslint/project-service@8.42.0_typescript@5.9.2",
-        "@typescript-eslint/tsconfig-utils@8.42.0_typescript@5.9.2",
-        "@typescript-eslint/types@8.42.0",
-        "@typescript-eslint/visitor-keys@8.42.0",
-        "debug",
-        "fast-glob",
-        "is-glob",
-        "minimatch@9.0.5",
-        "semver",
-        "ts-api-utils",
-        "typescript"
-      ]
-    },
     "@typescript-eslint/typescript-estree@8.43.0_typescript@5.9.2": {
       "integrity": "sha512-7Vv6zlAhPb+cvEpP06WXXy/ZByph9iL6BQRBDj4kmBsW98AqEeQHlj/13X+sZOrKSo9/rNKH4Ul4f6EICREFdw==",
       "dependencies": [
-        "@typescript-eslint/project-service@8.43.0_typescript@5.9.2",
-        "@typescript-eslint/tsconfig-utils@8.43.0_typescript@5.9.2",
-        "@typescript-eslint/types@8.43.0",
-        "@typescript-eslint/visitor-keys@8.43.0",
+        "@typescript-eslint/project-service",
+        "@typescript-eslint/tsconfig-utils",
+        "@typescript-eslint/types",
+        "@typescript-eslint/visitor-keys",
         "debug",
         "fast-glob",
         "is-glob",
         "minimatch@9.0.5",
         "semver",
         "ts-api-utils",
-        "typescript"
-      ]
-    },
-    "@typescript-eslint/utils@8.42.0_eslint@9.35.0_typescript@5.9.2": {
-      "integrity": "sha512-JnIzu7H3RH5BrKC4NoZqRfmjqCIS1u3hGZltDYJgkVdqAezl4L9d1ZLw+36huCujtSBSAirGINF/S4UxOcR+/g==",
-      "dependencies": [
-        "@eslint-community/eslint-utils",
-        "@typescript-eslint/scope-manager@8.42.0",
-        "@typescript-eslint/types@8.42.0",
-        "@typescript-eslint/typescript-estree@8.42.0_typescript@5.9.2",
-        "eslint",
         "typescript"
       ]
     },
@@ -646,24 +578,17 @@
       "integrity": "sha512-S1/tEmkUeeswxd0GGcnwuVQPFWo8NzZTOMxCvw8BX7OMxnNae+i8Tm7REQen/SwUIPoPqfKn7EaZ+YLpiB3k9g==",
       "dependencies": [
         "@eslint-community/eslint-utils",
-        "@typescript-eslint/scope-manager@8.43.0",
-        "@typescript-eslint/types@8.43.0",
-        "@typescript-eslint/typescript-estree@8.43.0_typescript@5.9.2",
+        "@typescript-eslint/scope-manager",
+        "@typescript-eslint/types",
+        "@typescript-eslint/typescript-estree",
         "eslint",
         "typescript"
-      ]
-    },
-    "@typescript-eslint/visitor-keys@8.42.0": {
-      "integrity": "sha512-3WbiuzoEowaEn8RSnhJBrxSwX8ULYE9CXaPepS2C2W3NSA5NNIvBaslpBSBElPq0UGr0xVJlXFWOAKIkyylydQ==",
-      "dependencies": [
-        "@typescript-eslint/types@8.42.0",
-        "eslint-visitor-keys@4.2.1"
       ]
     },
     "@typescript-eslint/visitor-keys@8.43.0": {
       "integrity": "sha512-T+S1KqRD4sg/bHfLwrpF/K3gQLBM1n7Rp7OjjikjTEssI2YJzQpi5WXoynOaQ93ERIuq3O8RBTOUYDKszUCEHw==",
       "dependencies": [
-        "@typescript-eslint/types@8.43.0",
+        "@typescript-eslint/types",
         "eslint-visitor-keys@4.2.1"
       ]
     },
@@ -672,23 +597,11 @@
       "dependencies": [
         "@unocss/core",
         "@unocss/reset",
-        "@unocss/vite@66.5.1_vite@7.1.5__picomatch@4.0.3",
-        "vite@7.1.5_picomatch@4.0.3"
+        "@unocss/vite",
+        "vite"
       ],
       "optionalPeers": [
-        "vite@7.1.5_picomatch@4.0.3"
-      ]
-    },
-    "@unocss/astro@66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0": {
-      "integrity": "sha512-f17+xfyBZ9prFx4jda3D9ngOigjO8btHsR3uG7WeDQPW6OBdhETfIGdXs8WD99J/3A3LJtk7J0u9p121S+RE8Q==",
-      "dependencies": [
-        "@unocss/core",
-        "@unocss/reset",
-        "@unocss/vite@66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
-      ],
-      "optionalPeers": [
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "@unocss/cli@66.5.1": {
@@ -729,7 +642,7 @@
     "@unocss/eslint-plugin@66.5.1_eslint@9.35.0": {
       "integrity": "sha512-wb9+Ntfo62v77lhBa9ZlgKzxjBvWDFJwogevzT9rl0jJuqwZgLABwEDZOANWEso21z3FKHugN86Ei/STqojeQQ==",
       "dependencies": [
-        "@typescript-eslint/utils@8.42.0_eslint@9.35.0_typescript@5.9.2",
+        "@typescript-eslint/utils",
         "@unocss/config",
         "@unocss/core",
         "@unocss/rule-utils",
@@ -887,22 +800,7 @@
         "pathe",
         "tinyglobby",
         "unplugin-utils",
-        "vite@7.1.5_picomatch@4.0.3"
-      ]
-    },
-    "@unocss/vite@66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0": {
-      "integrity": "sha512-qcZMh+SZbKYfTjJC2CP6B9Zxg0jlfhJSDVmXdjQBlUzhQR9FllnwlBdae6SCVFBc634Sm+pBJIri5ShPLvwq+Q==",
-      "dependencies": [
-        "@jridgewell/remapping",
-        "@unocss/config",
-        "@unocss/core",
-        "@unocss/inspector",
-        "chokidar",
-        "magic-string",
-        "pathe",
-        "tinyglobby",
-        "unplugin-utils",
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "@vue/reactivity@3.1.5": {
@@ -1134,13 +1032,7 @@
     "domco@4.3.1_vite@7.1.5__picomatch@4.0.3": {
       "integrity": "sha512-c4cE/Y8L4Mv0dQQWYp6lw33q6EEe5bdUCiYcj1YQwOzZ+nV8fFT41/s40XU9YQxAtMrC4WtwYehsbREbBV/g/A==",
       "dependencies": [
-        "vite@7.1.5_picomatch@4.0.3"
-      ]
-    },
-    "domco@4.3.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0": {
-      "integrity": "sha512-c4cE/Y8L4Mv0dQQWYp6lw33q6EEe5bdUCiYcj1YQwOzZ+nV8fFT41/s40XU9YQxAtMrC4WtwYehsbREbBV/g/A==",
-      "dependencies": [
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "duplexer@0.1.2": {
@@ -1743,8 +1635,8 @@
       "dependencies": [
         "@typescript-eslint/eslint-plugin",
         "@typescript-eslint/parser",
-        "@typescript-eslint/typescript-estree@8.43.0_typescript@5.9.2",
-        "@typescript-eslint/utils@8.43.0_eslint@9.35.0_typescript@5.9.2",
+        "@typescript-eslint/typescript-estree",
+        "@typescript-eslint/utils",
         "eslint",
         "typescript"
       ]
@@ -1765,13 +1657,10 @@
         "quansync"
       ]
     },
-    "undici-types@7.10.0": {
-      "integrity": "sha512-t5Fy/nfn+14LuOc2KNYg75vZqClpAiqscVvMygNnlsHBFpSXdJaYtXMcdNLpl/Qvc3P2cB3s6lOV51nqsFq4ag=="
-    },
     "unocss@66.5.1_vite@7.1.5__picomatch@4.0.3": {
       "integrity": "sha512-e+9nqOy9v6NwPz0DxFdApGPefW22pCfU0Z1ALuodEoSHen03WlfTuEhkDkcKEpdo78tbIi/BbAYK9qT8p1d9sg==",
       "dependencies": [
-        "@unocss/astro@66.5.1_vite@7.1.5__picomatch@4.0.3",
+        "@unocss/astro",
         "@unocss/cli",
         "@unocss/core",
         "@unocss/postcss",
@@ -1789,39 +1678,11 @@
         "@unocss/transformer-compile-class",
         "@unocss/transformer-directives",
         "@unocss/transformer-variant-group",
-        "@unocss/vite@66.5.1_vite@7.1.5__picomatch@4.0.3",
-        "vite@7.1.5_picomatch@4.0.3"
+        "@unocss/vite",
+        "vite"
       ],
       "optionalPeers": [
-        "vite@7.1.5_picomatch@4.0.3"
-      ]
-    },
-    "unocss@66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0": {
-      "integrity": "sha512-e+9nqOy9v6NwPz0DxFdApGPefW22pCfU0Z1ALuodEoSHen03WlfTuEhkDkcKEpdo78tbIi/BbAYK9qT8p1d9sg==",
-      "dependencies": [
-        "@unocss/astro@66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
-        "@unocss/cli",
-        "@unocss/core",
-        "@unocss/postcss",
-        "@unocss/preset-attributify",
-        "@unocss/preset-icons",
-        "@unocss/preset-mini",
-        "@unocss/preset-tagify",
-        "@unocss/preset-typography",
-        "@unocss/preset-uno",
-        "@unocss/preset-web-fonts",
-        "@unocss/preset-wind",
-        "@unocss/preset-wind3",
-        "@unocss/preset-wind4",
-        "@unocss/transformer-attributify-jsx",
-        "@unocss/transformer-compile-class",
-        "@unocss/transformer-directives",
-        "@unocss/transformer-variant-group",
-        "@unocss/vite@66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
-      ],
-      "optionalPeers": [
-        "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0"
+        "vite"
       ]
     },
     "unplugin-utils@0.3.0": {
@@ -1849,25 +1710,6 @@
       ],
       "optionalDependencies": [
         "fsevents"
-      ],
-      "bin": true
-    },
-    "vite@7.1.5_picomatch@4.0.3_@types+node@24.2.0": {
-      "integrity": "sha512-4cKBO9wR75r0BeIWWWId9XK9Lj6La5X846Zw9dFfzMRw38IlTk2iCcUt6hsyiDRcPidc55ZParFYDXi0nXOeLQ==",
-      "dependencies": [
-        "@types/node",
-        "esbuild",
-        "fdir",
-        "picomatch@4.0.3",
-        "postcss",
-        "rollup",
-        "tinyglobby"
-      ],
-      "optionalDependencies": [
-        "fsevents"
-      ],
-      "optionalPeers": [
-        "@types/node"
       ],
       "bin": true
     },
@@ -1921,7 +1763,6 @@
         "dependencies": [
           "jsr:@hono/hono@^4.9.6",
           "npm:@deno/vite-plugin@^1.0.5",
-          "npm:@eslint/js@^9.35.0",
           "npm:@unocss/eslint-config@^66.5.1",
           "npm:domco@^4.3.1",
           "npm:eslint@^9.35.0",
