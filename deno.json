@@ -7,9 +7,8 @@
   "tasks": {
     "website": "cd ./website && vite",
     "website:build": "cd ./website && deno task build",
-    "website:preview": "cd ./website && deno serve --allow-read ./dist/server/app.js",
-    "website:fix": "cd ./website && eslint src/server --fix",
-    "website:ssg": "cd ./website && deno task ssg"
+    "website:serve": "cd ./website && deno task serve",
+    "website:fix": "cd ./website && eslint src/server --fix"
   },
   "compilerOptions": {
     "lib": ["dom", "deno.ns"]

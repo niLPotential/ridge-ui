@@ -2,7 +2,7 @@
   "tasks": {
     "vite": "vite",
     "build": "vite build",
-    "ssg": "deno task build && deno --allow-write ./ssg.ts"
+    "serve": "deno task build && deno serve --allow-read ./dist/server/app.js"
   },
   "compilerOptions": {
     "jsx": "react-jsx",
