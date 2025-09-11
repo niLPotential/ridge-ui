@@ -182,7 +182,7 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     }));
   }
 
-  send(event: any) {
+  send = (event: any) => {
     if (this.status !== MachineStatus.Started) return;
 
     this.previousEvent = this._event;
@@ -218,7 +218,7 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
       // call transition actions
       this.action(transition.actions);
     }
-  }
+  };
 
   private action = (keys: ActionsOrFn<T> | undefined) => {
     const strs = isFunction(keys) ? keys(this.getParams()) : keys;
