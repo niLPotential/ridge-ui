@@ -50,17 +50,13 @@ export class AngleSlider extends AlpineMachine<any> {
       ":data-disabled": () => dataAttr(this.disabled),
       ":data-invalid": () => dataAttr(this.invalid),
       ":data-readonly": () => dataAttr(this.readOnly),
-      ":style": () => ({
-        "--value": this.value,
-        "--angle": this.valueAsDegree,
-      }),
     };
   }
 
   get label() {
     return {
       ...parts.label.attrs,
-      ":for": "$id{'hidden-input}",
+      ":for": "$id('hidden-input')",
       ":data-disabled": () => dataAttr(this.disabled),
       ":data-invalid": () => dataAttr(this.invalid),
       ":data-readonly": () => dataAttr(this.readOnly),
@@ -95,11 +91,6 @@ export class AngleSlider extends AlpineMachine<any> {
         });
         event.stopPropagation();
       },
-      ":style": () => ({
-        touchAction: "none",
-        userSelect: "none",
-        WebkitUserSelect: "none",
-      }),
     };
   }
 
@@ -151,7 +142,7 @@ export class AngleSlider extends AlpineMachine<any> {
         }
       },
       ":style": () => ({
-        rotate: `var(--angle)`,
+        rotate: this.valueAsDegree,
       }),
     };
   }
@@ -179,8 +170,7 @@ export class AngleSlider extends AlpineMachine<any> {
         : "at-value",
     ":data-disabled": () => dataAttr(this.disabled),
     ":style": () => ({
-      "--marker-value": props.value,
-      rotate: `calc(var(--marker-value) * 1deg)`,
+      rotate: `calc(${props.value} * 1deg)`,
     }),
   });
 }
