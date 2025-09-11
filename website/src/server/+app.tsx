@@ -46,12 +46,12 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
 app.get("/", (c) =>
   c.render(
     <div>
-      <a href="/checkbox">checkbox</a>
+      <a href="./checkbox">checkbox</a>
     </div>,
     { title: "Home" },
   ));
 app.get(
-  "/checkbox",
+  "/checkbox/",
   (c) =>
     c.render(<CheckBoxDemo />, {
       title: "Checkbox",
