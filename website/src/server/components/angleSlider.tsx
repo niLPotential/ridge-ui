@@ -10,7 +10,7 @@ export default function AngleSliderDemo() {
       </label>
       <div
         x-bind="control"
-        class="relative h-120px w-120px flex select-none items-center justify-center rounded-full bg-blueGray data-[disabled]:opacity-40"
+        class="relative h-sm w-120px flex select-none items-center justify-center rounded-full bg-blueGray data-[disabled]:opacity-40"
       >
         <div
           x-bind="thumb"
@@ -19,7 +19,7 @@ export default function AngleSliderDemo() {
         </div>
         <div
           x-bind="markerGroup"
-          class="absolute bottom-0 left-[calc(50%-1px)] top-0 w-0.5 before:(absolute left-0.5px top-sm h-[1.75rem] w-1px bg-blue -translate-50%)"
+          class="absolute bottom-0 left-[calc(50%-1px)] top-0 w-0.5 before:(absolute left-0.5px top-sm h-[1.75rem] w-1px bg-blue -translate-50%) data-[state=at-value]:bg-bluegray data-[state=over-value]:bg-blue data-[state=under-value]:bg-bluegray"
         >
           <template
             x-for="v in [0, 45, 90, 135, 180, 225, 270, 315]"
