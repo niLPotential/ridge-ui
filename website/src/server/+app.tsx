@@ -1,5 +1,5 @@
 import { Hono } from "@hono/hono";
-import { serveStatic } from "@hono/hono/deno";
+// import { serveStatic } from "@hono/hono/deno";
 import { jsxRenderer } from "@hono/hono/jsx-renderer";
 
 import { src } from "client:script";
@@ -26,14 +26,18 @@ app.use(jsxRenderer(({ children, title, srcs }) => (
       <meta charset="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       {srcs?.map((_src) =>
-        _src.module.map((s, i) => <script type="module" src={s} key={i} />)
+        _src.module.map((s, i) => (
+          <script type="module" src={"." + s} key={i} />
+        ))
       )}
-      {src.module.map((_src, i) => <script type="module" src={_src} key={i} />)}
+      {src.module.map((_src, i) => (
+        <script type="module" src={"." + _src} key={i} />
+      ))}
       {src.preload.map((href, i) => (
-        <link rel="modulepreload" crossorigin="" href={href} key={i} />
+        <link rel="modulepreload" crossorigin="" href={"." + href} key={i} />
       ))}
       {src.style.map((href, i) => (
-        <link rel="stylesheet" href={href} key={i} />
+        <link rel="stylesheet" href={"." + href} key={i} />
       ))}
       <title>{title} - Ridge UI</title>
     </head>
@@ -59,9 +63,10 @@ app.get(
     }),
 );
 
-app.use(
-  "/_immutable/*",
-  serveStatic({ root: "./dist/client/" }),
-);
+// Not needed for SSG
+// app.use(
+//   "/_immutable/*",
+//   serveStatic({ root: "./dist/client/" }),
+// );
 
-export default app;
+export default { ...app, prerender: ["/", "/checkbox/"] };

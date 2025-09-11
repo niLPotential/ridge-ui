@@ -12,7 +12,7 @@ jobs:
         with:
           deno-version: v2.x
       - name: Build pages
-        run: deno task website:ssg
+        run: deno task website:build
       - name: Upload artifacts
         uses: actions/upload-pages-artifact@v4
         with:
