@@ -4,6 +4,7 @@
   "exports": "./mod.ts",
   "license": "MIT",
   "imports": {
+    "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.22.1",
     "@zag-js/core": "npm:@zag-js/core@^1.22.1",
     "@zag-js/utils": "npm:@zag-js/utils@^1.22.1"
   }
