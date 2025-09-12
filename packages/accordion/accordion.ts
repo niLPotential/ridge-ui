@@ -7,6 +7,13 @@ import {
   getItemTriggerId,
   getRootId,
 } from "./dom.ts";
+import type {
+  ItemContentProps,
+  ItemIndicatorProps,
+  ItemProps,
+  ItemTriggerProps,
+  RootProps,
+} from "./types.ts";
 
 const parts = accordion.anatomy.build();
 
@@ -50,7 +57,7 @@ export class Accordion extends AlpineMachine<any> {
     };
   }
 
-  get root() {
+  get root(): RootProps {
     return {
       ...parts.root.attrs,
       dir: this.prop("dir"),
@@ -59,7 +66,7 @@ export class Accordion extends AlpineMachine<any> {
     };
   }
 
-  item = (props: accordion.ItemProps) => ({
+  item = (props: accordion.ItemProps): ItemProps => ({
     ...parts.item.attrs,
     dir: this.prop("dir"),
     id: getItemId(this.scope, props.value),
@@ -69,7 +76,7 @@ export class Accordion extends AlpineMachine<any> {
     "data-orientation": this.prop("orientation"),
   });
 
-  itemContent = (props: accordion.ItemProps) => {
+  itemContent = (props: accordion.ItemProps):ItemContentProps => {
     return {
       ...parts.itemContent.attrs,
       dir: this.prop("dir"),
@@ -84,19 +91,19 @@ export class Accordion extends AlpineMachine<any> {
     };
   };
 
-  itemIndicator = (props: accordion.ItemProps) => {
+  itemIndicator = (props: accordion.ItemProps):ItemIndicatorProps => {
     return {
       ...parts.itemIndicator.attrs,
       dir: this.prop("dir"),
       "aria-hidden": true,
-      "data-state": this.getExpanded(props) ? "open" : "closed",
-      "data-disabled": dataAttr(this.getDisabled(props)),
-      "data-focus": dataAttr(this.getFocused(props)),
+      ":data-state": () => this.getExpanded(props) ? "open" : "closed",
+      ":data-disabled": () => dataAttr(this.getDisabled(props)),
+      ":data-focus": () => dataAttr(this.getFocused(props)),
       "data-orientation": this.prop("orientation"),
     };
   };
 
-  itemTrigger = (props: accordion.ItemProps) => {
+  itemTrigger = (props: accordion.ItemProps):ItemTriggerProps => {
     return {
       ...parts.itemTrigger.attrs,
       type: "button",
