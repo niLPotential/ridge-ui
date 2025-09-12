@@ -1,6 +1,6 @@
 {
   "name": "@ridge-ui/angle-slider",
-  "version": "0.0.0",
+  "version": "0.0.7",
   "exports": "./mod.ts",
   "imports": {
     "@zag-js/angle-slider": "npm:@zag-js/angle-slider@^1.23.0"

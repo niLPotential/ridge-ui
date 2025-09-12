@@ -1,6 +1,6 @@
 {
   "name": "@ridge-ui/accordion",
-  "version": "0.0.0",
+  "version": "0.0.7",
   "exports": "./mod.ts",
   "license": "MIT",
   "imports": {
