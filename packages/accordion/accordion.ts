@@ -1,16 +1,24 @@
-import { dataAttr, isSafari } from "@zag-js/dom-query";
+import { dataAttr, getEventKey, isSafari } from "@zag-js/dom-query";
 import * as accordion from "@zag-js/accordion";
-import { Component } from "@ridge-ui/lib";
+import { AlpineMachine } from "@ridge-ui/lib";
+import {
+  getItemContentId,
+  getItemId,
+  getItemTriggerId,
+  getRootId,
+} from "./dom.ts";
 
-export class Accordion extends Component<any> {
+const parts = accordion.anatomy.build();
+
+export class Accordion extends AlpineMachine<any> {
   constructor(userProps: Partial<accordion.Props>) {
     super(accordion.machine, userProps);
   }
 
-  get focusedValue() {
+  get focusedValue(): string {
     return this.context.get("focusedValue");
   }
-  get value() {
+  get value(): string[] {
     return this.context.get("value");
   }
   private get multiple() {
@@ -44,14 +52,18 @@ export class Accordion extends Component<any> {
 
   get root() {
     return {
+      ...parts.root.attrs,
       dir: this.prop("dir"),
+      id: getRootId(this.scope),
       "data-orientation": this.prop("orientation"),
     };
   }
 
   getItem(props: accordion.ItemProps) {
     return {
+      ...parts.item.attrs,
       dir: this.prop("dir"),
+      id: getItemId(this.scope, props.value),
       ":data-state": () => this.getExpanded(props) ? "open" : "closed",
       ":data-focus": () => dataAttr(this.getFocused(props)),
       ":data-disabled": () => dataAttr(this.getDisabled(props)),
@@ -61,18 +73,22 @@ export class Accordion extends Component<any> {
 
   itemContent(props: accordion.ItemProps) {
     return {
+      ...parts.itemContent.attrs,
       dir: this.prop("dir"),
       role: "region",
+      id: getItemContentId(this.scope, props.value),
+      "aria-labeledby": getItemTriggerId(this.scope, props.value),
       ":hidden": () => !this.getExpanded(props),
       ":data-state": () => this.getExpanded(props) ? "open" : "closed",
-      ":data-focus": () => dataAttr(this.getFocused(props)),
       ":data-disabled": () => dataAttr(this.getDisabled(props)),
+      ":data-focus": () => dataAttr(this.getFocused(props)),
       "data-orientation": this.prop("orientation"),
     };
   }
 
   itemIndicator(props: accordion.ItemProps) {
     return {
+      ...parts.itemIndicator.attrs,
       dir: this.prop("dir"),
       "aria-hidden": true,
       "data-state": this.getExpanded(props) ? "open" : "closed",
@@ -84,13 +100,17 @@ export class Accordion extends Component<any> {
 
   itemTrigger(props: accordion.ItemProps) {
     return {
+      ...parts.itemTrigger.attrs,
       type: "button",
       dir: this.prop("dir"),
+      id: getItemTriggerId(this.scope, props.value),
+      "aria-controls": getItemContentId(this.scope, props.value),
       ":aria-expanded": () => this.getExpanded(props),
       ":disabled": () => this.getDisabled(props),
       "data-orientation": this.prop("orientation"),
       ":aria-disabled": () => this.getDisabled(props),
       ":data-state": () => this.getExpanded(props) ? "open" : "closed",
+      "data-ownedby": getRootId(this.scope),
       "@focus": () => {
         if (this.getDisabled(props)) return;
         this.send({ type: "TRIGGER.FOCUS", value: props.value });
@@ -105,6 +125,52 @@ export class Accordion extends Component<any> {
           event.currentTarget.focus();
         }
         this.send({ type: "TRIGGER.CLICK", value: props.value });
+      },
+      "@keydown": (event: any) => {
+        if (event.defaultPrevented) return;
+        if (this.getDisabled(props)) return;
+
+        const key = getEventKey(event, {
+          dir: this.prop("dir"),
+          orientation: this.prop("orientation"),
+        });
+
+        switch (key) {
+          case ("ArrowDown"): {
+            if (this.computed("isHorizontal")) return;
+            this.send({ type: "GOTO.NEXT", value: props.value });
+            event.preventDefault();
+            break;
+          }
+          case ("ArrowUp"): {
+            if (this.computed("isHorizontal")) return;
+            this.send({ type: "GOTO.PREV", value: props.value });
+            event.preventDefault();
+            break;
+          }
+          case ("ArrowRight"): {
+            if (!this.computed("isHorizontal")) return;
+            this.send({ type: "GOTO.NEXT", value: props.value });
+            event.preventDefault();
+            break;
+          }
+          case ("ArrowLeft"): {
+            if (!this.computed("isHorizontal")) return;
+            this.send({ type: "GOTO.PREV", value: props.value });
+            event.preventDefault();
+            break;
+          }
+          case ("Home"): {
+            this.send({ type: "GOTO.FIRST", value: props.value });
+            event.preventDefault();
+            break;
+          }
+          case ("End"): {
+            this.send({ type: "GOTO.LAST", value: props.value });
+            event.preventDefault();
+            break;
+          }
+        }
       },
     };
   }
