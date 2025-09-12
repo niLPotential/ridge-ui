@@ -1,16 +1,19 @@
 import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
-import {
-  AlpineMachine,
-  type AnatomyPartAttrs,
-  type Booleanish,
-} from "@ridge-ui/lib";
+import { AlpineMachine } from "@ridge-ui/lib";
 import {
   getControlId,
   getHiddenInputId,
   getLabelId,
   getRootId,
 } from "./dom.ts";
+import type {
+  ControlProps,
+  HiddenInputProps,
+  IndicatorProps,
+  LabelProps,
+  RootProps,
+} from "./types.ts";
 
 const parts = checkbox.anatomy.build();
 
@@ -56,7 +59,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     return this.computed("indeterminate");
   }
 
-  private get dataAttrs(): DataAttrs {
+  private get dataAttrs() {
     return {
       ":data-active": () => dataAttr(this.context.get("active")),
       ":data-focus": () => dataAttr(this.focused),
@@ -169,55 +172,4 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
       },
     };
   }
-}
-
-interface DataAttrs {
-  ":data-active": () => Booleanish;
-  ":data-focus": () => Booleanish;
-  ":data-focus-visible": () => Booleanish;
-  ":data-readonly": () => Booleanish;
-  ":data-hover": () => Booleanish;
-  ":data-disabled": () => Booleanish;
-  ":data-state": () => "indeterminate" | "checked" | "unchecked";
-  ":data-invalid": () => Booleanish;
-  ":data-required": () => Booleanish;
-}
-interface RootProps extends AnatomyPartAttrs, DataAttrs {
-  dir: "ltr" | "rtl" | undefined;
-  id: any;
-  for: any;
-  "@pointermove": () => void;
-  "@pointerleave": () => void;
-  "@click":
-    "$event.target === $refs['hidden-input'] && $event.stopPropagation()";
-}
-interface LabelProps extends AnatomyPartAttrs, DataAttrs {
-  dir: "ltr" | "rtl" | undefined;
-  id: any;
-}
-interface ControlProps extends AnatomyPartAttrs, DataAttrs {
-  dir: "ltr" | "rtl" | undefined;
-  id: any;
-  "aria-hidden": true;
-}
-interface IndicatorProps extends AnatomyPartAttrs, DataAttrs {
-  dir: "ltr" | "rtl" | undefined;
-  ":hidden": () => boolean;
-}
-interface HiddenInputProps {
-  "x-ref": "hidden-input";
-  id: any;
-  type: "checkbox";
-  ":required": () => boolean | undefined;
-  ":defaultChecked": () => boolean;
-  ":disabled": () => boolean | undefined;
-  ":aria-labelledby": "$id('label')";
-  ":aria-invalid": () => boolean | undefined;
-  name: string | undefined;
-  form: string | undefined;
-  value: string;
-  ":style": () => typeof visuallyHiddenStyle;
-  "@focus": () => void;
-  "@blur": () => void;
-  "@click": (event: any) => void;
 }
