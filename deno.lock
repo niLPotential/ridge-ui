@@ -6,6 +6,7 @@
     "npm:@types/alpinejs@^3.13.11": "3.13.11",
     "npm:@types/node@*": "24.2.0",
     "npm:@unocss/eslint-config@^66.5.1": "66.5.1_eslint@9.35.0",
+    "npm:@unocss/reset@^66.5.1": "66.5.1",
     "npm:@zag-js/accordion@^1.23.0": "1.23.0",
     "npm:@zag-js/anatomy@^1.23.0": "1.23.0",
     "npm:@zag-js/angle-slider@^1.23.0": "1.23.0",
@@ -18,9 +19,9 @@
     "npm:eslint@9.35.0": "9.35.0",
     "npm:eslint@^9.35.0": "9.35.0",
     "npm:typescript-eslint@^8.43.0": "8.43.0_eslint@9.35.0_typescript@5.9.2_@typescript-eslint+parser@8.43.0__eslint@9.35.0__typescript@5.9.2",
-    "npm:unocss@^66.5.1": "66.5.1_vite@7.1.5__picomatch@4.0.3",
-    "npm:vite@7.1.5": "7.1.5_picomatch@4.0.3",
-    "npm:vite@^7.1.5": "7.1.5_picomatch@4.0.3"
+    "npm:unocss@^66.5.1": "66.5.1_vite@7.1.5__picomatch@4.0.3_@types+node@24.2.0",
+    "npm:vite@7.1.5": "7.1.5_picomatch@4.0.3_@types+node@24.2.0",
+    "npm:vite@^7.1.5": "7.1.5_picomatch@4.0.3_@types+node@24.2.0"
   },
   "jsr": {
     "@hono/hono@4.9.6": {
@@ -1831,7 +1832,7 @@
   "workspace": {
     "dependencies": [
       "npm:@types/alpinejs@^3.13.11",
-      "npm:@zag-js/anatomy@^1.23.0",
+      "npm:@zag-js/core@^1.23.0",
       "npm:@zag-js/dom-query@^1.23.0",
       "npm:alpinejs@^3.15.0"
     ],
@@ -1853,7 +1854,7 @@
       },
       "packages/lib": {
         "dependencies": [
-          "npm:@zag-js/core@^1.23.0",
+          "npm:@zag-js/anatomy@^1.23.0",
           "npm:@zag-js/utils@^1.23.0"
         ]
       },

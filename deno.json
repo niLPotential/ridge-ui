@@ -15,7 +15,7 @@
   },
   "imports": {
     "@types/alpinejs": "npm:@types/alpinejs@^3.13.11",
-    "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.23.0",
+    "@zag-js/core": "npm:@zag-js/core@^1.23.0",
     "@zag-js/dom-query": "npm:@zag-js/dom-query@^1.23.0",
     "alpinejs": "npm:alpinejs@^3.15.0"
   }
