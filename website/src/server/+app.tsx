@@ -10,6 +10,9 @@ import CheckboxDemo from "./components/checkbox.tsx";
 import { src as angleSliderSrc } from "client:script/angleSlider";
 import AngleSliderDemo from "./components/angleSlider.tsx";
 
+import { src as accordionSrc } from "client:script/accordion";
+import AccordionDemo from "./components/accordion.tsx";
+
 declare module "@hono/hono" {
   interface ContextRenderer {
     (
@@ -63,10 +66,13 @@ app.get("/", (c) =>
     <div>
       <ul>
         <li>
-          <a href="./checkbox/">checkbox</a>
+          <a href="./accordion/">accordion</a>
         </li>
         <li>
           <a href="./angle-slider/">angle slider</a>
+        </li>
+        <li>
+          <a href="./checkbox/">checkbox</a>
         </li>
       </ul>
     </div>,
@@ -88,6 +94,11 @@ app.get(
       srcs: [angleSliderSrc],
     }),
 );
+app.get("/accordion/", (c) =>
+  c.render(<AccordionDemo />, {
+    title: "Accordion",
+    srcs: [accordionSrc],
+  }));
 
 // Not needed for SSG
 // app.use(
@@ -97,5 +108,5 @@ app.get(
 
 export default {
   fetch: app.fetch,
-  prerender: ["/", "/angle-slider/", "/checkbox/"],
+  prerender: ["/", "/accordion/", "/angle-slider/", "/checkbox/"],
 };
