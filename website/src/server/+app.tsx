@@ -4,14 +4,17 @@ import { jsxRenderer } from "@hono/hono/jsx-renderer";
 
 import { src } from "client:script";
 
-import { src as checkboxSrc } from "client:script/checkbox";
-import CheckboxDemo from "./components/checkbox.tsx";
+import { src as accordionSrc } from "client:script/accordion";
+import AccordionDemo from "./components/accordion.tsx";
 
 import { src as angleSliderSrc } from "client:script/angleSlider";
 import AngleSliderDemo from "./components/angleSlider.tsx";
 
-import { src as accordionSrc } from "client:script/accordion";
-import AccordionDemo from "./components/accordion.tsx";
+import { src as avatarSrc } from "client:script/avatar";
+import AvatarDemo from "./components/avatar.tsx";
+
+import { src as checkboxSrc } from "client:script/checkbox";
+import CheckboxDemo from "./components/checkbox.tsx";
 
 declare module "@hono/hono" {
   interface ContextRenderer {
@@ -78,14 +81,11 @@ app.get("/", (c) =>
     </div>,
     { title: "Home" },
   ));
-app.get(
-  "/checkbox/",
-  (c) =>
-    c.render(<CheckboxDemo />, {
-      title: "Checkbox",
-      srcs: [checkboxSrc],
-    }),
-);
+app.get("/accordion/", (c) =>
+  c.render(<AccordionDemo />, {
+    title: "Accordion",
+    srcs: [accordionSrc],
+  }));
 app.get(
   "/angle-slider/",
   (c) =>
@@ -94,11 +94,19 @@ app.get(
       srcs: [angleSliderSrc],
     }),
 );
-app.get("/accordion/", (c) =>
-  c.render(<AccordionDemo />, {
-    title: "Accordion",
-    srcs: [accordionSrc],
+app.get("/avatar/", (c) =>
+  c.render(<AvatarDemo />, {
+    title: "Avatar",
+    srcs: [avatarSrc],
   }));
+app.get(
+  "/checkbox/",
+  (c) =>
+    c.render(<CheckboxDemo />, {
+      title: "Checkbox",
+      srcs: [checkboxSrc],
+    }),
+);
 
 // Not needed for SSG
 // app.use(
