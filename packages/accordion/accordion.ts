@@ -59,19 +59,17 @@ export class Accordion extends AlpineMachine<any> {
     };
   }
 
-  getItem(props: accordion.ItemProps) {
-    return {
-      ...parts.item.attrs,
-      dir: this.prop("dir"),
-      id: getItemId(this.scope, props.value),
-      ":data-state": () => this.getExpanded(props) ? "open" : "closed",
-      ":data-focus": () => dataAttr(this.getFocused(props)),
-      ":data-disabled": () => dataAttr(this.getDisabled(props)),
-      "data-orientation": this.prop("orientation"),
-    };
-  }
+  item = (props: accordion.ItemProps) => ({
+    ...parts.item.attrs,
+    dir: this.prop("dir"),
+    id: getItemId(this.scope, props.value),
+    ":data-state": () => this.getExpanded(props) ? "open" : "closed",
+    ":data-focus": () => dataAttr(this.getFocused(props)),
+    ":data-disabled": () => dataAttr(this.getDisabled(props)),
+    "data-orientation": this.prop("orientation"),
+  });
 
-  itemContent(props: accordion.ItemProps) {
+  itemContent = (props: accordion.ItemProps) => {
     return {
       ...parts.itemContent.attrs,
       dir: this.prop("dir"),
@@ -84,9 +82,9 @@ export class Accordion extends AlpineMachine<any> {
       ":data-focus": () => dataAttr(this.getFocused(props)),
       "data-orientation": this.prop("orientation"),
     };
-  }
+  };
 
-  itemIndicator(props: accordion.ItemProps) {
+  itemIndicator = (props: accordion.ItemProps) => {
     return {
       ...parts.itemIndicator.attrs,
       dir: this.prop("dir"),
@@ -96,9 +94,9 @@ export class Accordion extends AlpineMachine<any> {
       "data-focus": dataAttr(this.getFocused(props)),
       "data-orientation": this.prop("orientation"),
     };
-  }
+  };
 
-  itemTrigger(props: accordion.ItemProps) {
+  itemTrigger = (props: accordion.ItemProps) => {
     return {
       ...parts.itemTrigger.attrs,
       type: "button",
@@ -173,5 +171,5 @@ export class Accordion extends AlpineMachine<any> {
         }
       },
     };
-  }
+  };
 }
