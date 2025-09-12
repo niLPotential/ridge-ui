@@ -1,6 +1,10 @@
 import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
-import { AlpineMachine, type AnatomyPartAttrs } from "@ridge-ui/lib";
+import {
+  AlpineMachine,
+  type AnatomyPartAttrs,
+  type Booleanish,
+} from "@ridge-ui/lib";
 
 const parts = checkbox.anatomy.build();
 
@@ -162,7 +166,6 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
   }
 }
 
-type Booleanish = boolean | "true" | "false";
 interface DataAttrs {
   ":data-active": () => Booleanish;
   ":data-focus": () => Booleanish;
