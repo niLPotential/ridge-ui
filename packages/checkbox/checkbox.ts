@@ -5,6 +5,12 @@ import {
   type AnatomyPartAttrs,
   type Booleanish,
 } from "@ridge-ui/lib";
+import {
+  getControlId,
+  getHiddenInputId,
+  getLabelId,
+  getRootId,
+} from "./dom.ts";
 
 const parts = checkbox.anatomy.build();
 
@@ -20,8 +26,8 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     super(checkbox.machine, userProps);
   }
 
-  get disabled(): boolean | undefined {
-    return this.prop("disabled");
+  get disabled(): boolean {
+    return this.prop("disabled") as boolean;
   }
   private get readOnly() {
     return this.prop("readOnly");
@@ -84,10 +90,9 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
     return {
       ...parts.root.attrs,
       ...this.dataAttrs,
-      "x-id": () => ["root", "label", "control", "hidden-input"],
       dir: this.prop("dir"),
-      ":id": "$id('root')",
-      ":for": "$id('hidden-input')",
+      id: getRootId(this.scope),
+      for: getHiddenInputId(this.scope),
       "@pointermove": () => {
         if (this.disabled) return;
         this.send({ type: "CONTEXT.SET", context: { hovered: true } });
@@ -105,7 +110,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
       ...parts.label.attrs,
       ...this.dataAttrs,
       dir: this.prop("dir"),
-      ":id": "$id('label')",
+      id: getLabelId(this.scope),
     };
   }
 
@@ -114,7 +119,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
       ...parts.control.attrs,
       ...this.dataAttrs,
       dir: this.prop("dir"),
-      ":id": "$id('control')",
+      id: getControlId(this.scope),
       "aria-hidden": true,
     };
   }
@@ -131,7 +136,7 @@ export class Checkbox extends AlpineMachine<checkbox.Schema> {
   get hiddenInput(): HiddenInputProps {
     return {
       "x-ref": "hidden-input",
-      ":id": "$id('hidden-input')",
+      id: getHiddenInputId(this.scope),
       type: "checkbox",
       ":required": () => this.prop("required"),
       ":defaultChecked": () => this.checked,
@@ -179,9 +184,8 @@ interface DataAttrs {
 }
 interface RootProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
-  "x-id": () => ["root", "label", "control", "hidden-input"];
-  ":id": "$id('root')";
-  ":for": "$id('hidden-input')";
+  id: any;
+  for: any;
   "@pointermove": () => void;
   "@pointerleave": () => void;
   "@click":
@@ -189,11 +193,11 @@ interface RootProps extends AnatomyPartAttrs, DataAttrs {
 }
 interface LabelProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
-  ":id": "$id('label')";
+  id: any;
 }
 interface ControlProps extends AnatomyPartAttrs, DataAttrs {
   dir: "ltr" | "rtl" | undefined;
-  ":id": "$id('control')";
+  id: any;
   "aria-hidden": true;
 }
 interface IndicatorProps extends AnatomyPartAttrs, DataAttrs {
@@ -202,7 +206,7 @@ interface IndicatorProps extends AnatomyPartAttrs, DataAttrs {
 }
 interface HiddenInputProps {
   "x-ref": "hidden-input";
-  ":id": "$id('hidden-input')";
+  id: any;
   type: "checkbox";
   ":required": () => boolean | undefined;
   ":defaultChecked": () => boolean;
@@ -211,7 +215,7 @@ interface HiddenInputProps {
   ":aria-invalid": () => boolean | undefined;
   name: string | undefined;
   form: string | undefined;
-  value: string | undefined;
+  value: string;
   ":style": () => typeof visuallyHiddenStyle;
   "@focus": () => void;
   "@blur": () => void;
