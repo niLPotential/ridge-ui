@@ -5,7 +5,11 @@ import {
   isLeftClick,
 } from "@zag-js/dom-query";
 import * as angleSlider from "@zag-js/angle-slider";
-import { AlpineMachine } from "@ridge-ui/lib";
+import {
+  AlpineMachine,
+  type AnatomyPartAttrs,
+  type Booleanish,
+} from "@ridge-ui/lib";
 import {
   getControlId,
   getHiddenInputId,
@@ -49,7 +53,7 @@ export class AngleSlider extends AlpineMachine<any> {
     this.send({ type: "VALUE.SET", value });
   }
 
-  get root() {
+  get root(): RootProps {
     return {
       ...parts.root.attrs,
       id: getRootId(this.scope),
@@ -59,7 +63,7 @@ export class AngleSlider extends AlpineMachine<any> {
     };
   }
 
-  get label() {
+  get label(): LabelProps {
     return {
       ...parts.label.attrs,
       for: getHiddenInputId(this.scope),
@@ -71,7 +75,7 @@ export class AngleSlider extends AlpineMachine<any> {
     };
   }
 
-  get hiddenInput() {
+  get hiddenInput(): HiddenInputProps {
     return {
       type: "hidden",
       value: this.value,
@@ -80,7 +84,7 @@ export class AngleSlider extends AlpineMachine<any> {
     };
   }
 
-  get control() {
+  get control(): ControlProps {
     return {
       ...parts.control.attrs,
       role: "presentation",
@@ -100,7 +104,7 @@ export class AngleSlider extends AlpineMachine<any> {
     };
   }
 
-  get thumb() {
+  get thumb(): ThumbProps {
     return {
       ...parts.thumb.attrs,
       "x-ref": "thumb",
@@ -153,20 +157,20 @@ export class AngleSlider extends AlpineMachine<any> {
     };
   }
 
-  get valueText() {
+  get valueText(): ValueTextProps {
     return {
       ...parts.valueText.attrs,
       id: getValueTextId(this.scope),
     };
   }
 
-  get markerGroup() {
+  get markerGroup(): MarkerGroupProps {
     return {
       ...parts.markerGroup.attrs,
     };
   }
 
-  marker = (props: { value: number }) => ({
+  marker = (props: { value: number }): MarkerProps => ({
     ...parts.marker.attrs,
     ":data-value": () => props.value,
     ":data-state": () =>
@@ -180,4 +184,58 @@ export class AngleSlider extends AlpineMachine<any> {
       rotate: `calc(${props.value} * 1deg)`,
     }),
   });
+}
+
+interface RootProps extends AnatomyPartAttrs {
+  id: any;
+  ":data-disabled": () => Booleanish;
+  ":data-invalid": () => Booleanish;
+  ":data-readonly": () => Booleanish;
+}
+interface LabelProps extends AnatomyPartAttrs {
+  for: any;
+  ":data-disabled": () => Booleanish;
+  ":data-invalid": () => Booleanish;
+  ":data-readonly": () => Booleanish;
+  "@click": string;
+}
+interface HiddenInputProps {
+  type: "hidden";
+  value: number;
+  name: string;
+  id: any;
+}
+interface ControlProps extends AnatomyPartAttrs {
+  role: "presentation";
+  id: any;
+  ":data-disabled": () => Booleanish;
+  ":data-invalid": () => Booleanish;
+  ":data-readonly": () => Booleanish;
+  "@pointerdown": (event: any) => void;
+}
+interface ThumbProps extends AnatomyPartAttrs {
+  "x-ref": "thumb";
+  id: any;
+  role: "slider";
+  "aria-valuemax": 360;
+  "aria-valuemin": 0;
+  ":aria-valuenow": () => number;
+  ":tabIndex": () => 0 | undefined;
+  ":data-disabled": () => Booleanish;
+  ":data-invalid": () => Booleanish;
+  ":data-readonly": () => Booleanish;
+  "@focus": () => void;
+  "@blur": () => void;
+  "@keydown": (event: any) => void;
+  ":style": () => { rotate: string };
+}
+interface ValueTextProps extends AnatomyPartAttrs {
+  id: any;
+}
+interface MarkerGroupProps extends AnatomyPartAttrs {}
+interface MarkerProps extends AnatomyPartAttrs {
+  ":data-value": () => number;
+  ":data-state": () => "under-value" | "at-value" | "over-value";
+  ":data-disabled": () => Booleanish;
+  ":style": () => { rotate: string };
 }
