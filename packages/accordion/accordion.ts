@@ -76,7 +76,7 @@ export class Accordion extends AlpineMachine<any> {
     "data-orientation": this.prop("orientation"),
   });
 
-  itemContent = (props: accordion.ItemProps):ItemContentProps => {
+  itemContent = (props: accordion.ItemProps): ItemContentProps => {
     return {
       ...parts.itemContent.attrs,
       dir: this.prop("dir"),
@@ -91,7 +91,7 @@ export class Accordion extends AlpineMachine<any> {
     };
   };
 
-  itemIndicator = (props: accordion.ItemProps):ItemIndicatorProps => {
+  itemIndicator = (props: accordion.ItemProps): ItemIndicatorProps => {
     return {
       ...parts.itemIndicator.attrs,
       dir: this.prop("dir"),
@@ -103,7 +103,7 @@ export class Accordion extends AlpineMachine<any> {
     };
   };
 
-  itemTrigger = (props: accordion.ItemProps):ItemTriggerProps => {
+  itemTrigger = (props: accordion.ItemProps): ItemTriggerProps => {
     return {
       ...parts.itemTrigger.attrs,
       type: "button",
