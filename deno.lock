@@ -10,6 +10,7 @@
     "npm:@zag-js/accordion@^1.23.0": "1.23.0",
     "npm:@zag-js/anatomy@^1.23.0": "1.23.0",
     "npm:@zag-js/angle-slider@^1.23.0": "1.23.0",
+    "npm:@zag-js/avatar@^1.23.0": "1.23.0",
     "npm:@zag-js/checkbox@^1.23.0": "1.23.0",
     "npm:@zag-js/core@^1.23.0": "1.23.0",
     "npm:@zag-js/dom-query@^1.23.0": "1.23.0",
@@ -875,6 +876,16 @@
         "@zag-js/core",
         "@zag-js/dom-query",
         "@zag-js/rect-utils",
+        "@zag-js/types",
+        "@zag-js/utils"
+      ]
+    },
+    "@zag-js/avatar@1.23.0": {
+      "integrity": "sha512-XiNWAD7QCaw7kpDMjvHWjKjmHual3hH9F70zpYNup8ZRM9c6mxoSWXNHtkQOnK2c9KL8PUx4PVh0VfvF6TMKag==",
+      "dependencies": [
+        "@zag-js/anatomy",
+        "@zag-js/core",
+        "@zag-js/dom-query",
         "@zag-js/types",
         "@zag-js/utils"
       ]
@@ -1845,6 +1856,11 @@
       "packages/angle-slider": {
         "dependencies": [
           "npm:@zag-js/angle-slider@^1.23.0"
+        ]
+      },
+      "packages/avatar": {
+        "dependencies": [
+          "npm:@zag-js/avatar@^1.23.0"
         ]
       },
       "packages/checkbox": {
