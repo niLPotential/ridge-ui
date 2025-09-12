@@ -88,4 +88,7 @@ app.get(
 //   serveStatic({ root: "./dist/client/" }),
 // );
 
-export default { ...app, prerender: ["/", "/checkbox/"] };
+export default {
+  fetch: app.fetch,
+  prerender: ["/", "/angle-slider/", "/checkbox/"],
+};
