@@ -21,14 +21,14 @@ export class AngleSlider extends AlpineMachine<any> {
     super(angleSlider.machine, userProps);
   }
 
-  get dragging() {
+  get dragging(): boolean {
     return this.state.matches("dragging");
   }
 
-  get value() {
+  get value(): number {
     return this.context.get("value");
   }
-  get valueAsDegree() {
+  get valueAsDegree(): string {
     return this.computed("valueAsDegree");
   }
 
@@ -45,7 +45,7 @@ export class AngleSlider extends AlpineMachine<any> {
     return this.computed("interactive");
   }
 
-  setValue(value: any) {
+  setValue(value: number) {
     this.send({ type: "VALUE.SET", value });
   }
 
