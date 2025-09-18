@@ -1,5 +1,12 @@
 // import {} from "@zag-js/popper";
-import { ariaAttr, dataAttr } from "@zag-js/dom-query";
+import {
+  ariaAttr,
+  dataAttr,
+  isContextMenuEvent,
+  isDownloadingEvent,
+  isLeftClick,
+  isOpeningInNewTab,
+} from "@zag-js/dom-query";
 // import type { EventKeyMap } from "@zag-js/types";
 import * as combobox from "@zag-js/combobox";
 import { AlpineMachine } from "@ridge-ui/lib";
@@ -281,34 +288,140 @@ export class Combobox extends AlpineMachine<any> implements combobox.Api {
   }
 
   getContentProps() {
-    return {};
+    return {
+      ...parts.content.attrs,
+      dir: this.prop("dir"),
+      id: dom.getContentId(this.scope),
+      role: !this.composite ? "dialog" : "listbox",
+      tabIndex: -1,
+      hidden: !this.open,
+      "data-state": this.open ? "open" : "closed",
+      "data-placement": this.context.get("currentPlacement"),
+      "aria-labelledby": dom.getLabelId(this.scope),
+      "aria-multiselectable": this.prop("multiple") && this.composite
+        ? true
+        : undefined,
+      "data-empty": dataAttr(this.collection.size === 0),
+      "@pointerdown"(event: any) {
+        if (!isLeftClick(event)) return;
+        // prevent options or elements within listbox from taking focus
+        event.preventDefault();
+      },
+    };
   }
 
   getListProps() {
-    return {};
+    return {
+      ...parts.list.attrs,
+      role: !this.composite ? "listbox" : undefined,
+      "data-empty": dataAttr(this.collection.size === 0),
+      "aria-labelledby": dom.getLabelId(this.scope),
+      "aria-multiselectable": this.prop("multiple") && !this.composite
+        ? true
+        : undefined,
+    };
   }
 
   getClearTriggerProps() {
-    return {};
+    return {
+      ...parts.clearTrigger.attrs,
+      dir: this.prop("dir"),
+      id: dom.getClearTriggerId(this.scope),
+      type: "button",
+      tabIndex: -1,
+      disabled: this.disabled,
+      "data-invalid": dataAttr(this.invalid),
+      "aria-label": this.translations.clearTriggerLabel,
+      "aria-controls": dom.getInputId(this.scope),
+      ":hidden": () => !this.context.get("value").length,
+      "@pointerdown": (event: any) => {
+        if (!isLeftClick(event)) return;
+        event.preventDefault();
+      },
+      "@click": (event: any) => {
+        if (event.defaultPrevented) return;
+        if (!this.interactive) return;
+        this.send({ type: "VALUE.CLEAR", src: "clear-trigger" });
+      },
+    };
   }
 
   getItemProps(props: combobox.ItemProps) {
-    return {};
+    const { value, highlighted, selected, disabled } = this.getItemState(props);
+    return {
+      ...parts.item.attrs,
+      dir: this.prop("dir"),
+      id: dom.getItemId(this.scope, this.value),
+      role: "option",
+      tabIndex: -1,
+      "data-highlighted": dataAttr(highlighted),
+      "data-state": selected ? "checked" : "unchecked",
+      "aria-selected": ariaAttr(highlighted),
+      "aria-disabled": ariaAttr(disabled),
+      "data-disabled": dataAttr(disabled),
+      "data-value": value,
+      "@pointermove": () => {
+        if (disabled) return;
+        if (highlighted) return;
+        this.send({ type: "ITEM.POINTER_MOVE", value });
+      },
+      "pointerleave": (event: any) => {
+        if (props.persistFocus) return;
+        if (disabled) return;
+        const prev = event.previous();
+        const mouseMoved = prev?.type.includes("POINTER");
+        if (!mouseMoved) return;
+        this.send({ type: "ITEM.POINTER_LEAVE", value });
+      },
+      "@click": (event: any) => {
+        if (isDownloadingEvent(event)) return;
+        if (isOpeningInNewTab(event)) return;
+        if (isContextMenuEvent(event)) return;
+        if (disabled) return;
+        this.send({ type: "ITEM.CLICK", src: "item-select", value });
+      },
+    };
   }
 
   getItemTextProps(props: combobox.ItemProps) {
-    return {};
+    return {
+      ...parts.itemText.attrs,
+      dir: this.prop("dir"),
+      ":data-state": () =>
+        this.getItemState(props).selected ? "checked" : "unchecked",
+      ":data-disabled": () => dataAttr(this.getItemState(props).disabled),
+      ":data-highlighted": () => dataAttr(this.getItemState(props).highlighted),
+    };
   }
 
   getItemIndicatorProps(props: combobox.ItemProps) {
-    return {};
+    const { selected } = this.getItemState(props);
+    return {
+      "aria-hidden": true,
+      ...parts.itemIndicator.attrs,
+      dir: this.prop("dir"),
+      ":data-state": () => selected ? "checked" : "unchecked",
+      ":hidden": () => !selected,
+    };
   }
 
-  getItemGroupProps(props: combobox.ItemGroupProps) {
-    return {};
+  getItemGroupProps({ id }: combobox.ItemGroupProps) {
+    return {
+      ...parts.itemGroup.attrs,
+      dir: this.prop("dir"),
+      id: dom.getItemGroupId(this.scope, id),
+      "aria-labelledby": dom.getItemGroupLabelId(this.scope, id),
+      "data-empty": dataAttr(this.collection.size === 0),
+      role: "group",
+    };
   }
 
-  getItemGroupLabelProps(props: combobox.ItemGroupLabelProps) {
-    return {};
+  getItemGroupLabelProps({ htmlFor }: combobox.ItemGroupLabelProps) {
+    return {
+      ...parts.itemGroupLabel.attrs,
+      dir: this.prop("dir"),
+      id: dom.getItemGroupLabelId(this.scope, htmlFor),
+      role: "presentation",
+    };
   }
 }
