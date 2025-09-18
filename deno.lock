@@ -11,11 +11,13 @@
     "npm:@zag-js/angle-slider@^1.24.1": "1.24.1",
     "npm:@zag-js/avatar@^1.24.1": "1.24.1",
     "npm:@zag-js/checkbox@^1.24.1": "1.24.1",
+    "npm:@zag-js/combobox@^1.24.1": "1.24.1",
     "npm:@zag-js/core@^1.24.1": "1.24.1",
     "npm:@zag-js/dom-query@^1.24.1": "1.24.1",
     "npm:@zag-js/utils@^1.24.1": "1.24.1",
     "npm:alpinejs@^3.15.0": "3.15.0",
     "npm:domco@^4.3.1": "4.3.1_vite@7.1.6__picomatch@4.0.3",
+    "npm:eslint@9.35.0": "9.35.0",
     "npm:eslint@^9.35.0": "9.35.0",
     "npm:typescript-eslint@^8.44.0": "8.44.0_eslint@9.35.0_typescript@5.9.2_@typescript-eslint+parser@8.44.0__eslint@9.35.0__typescript@5.9.2",
     "npm:unocss@^66.5.1": "66.5.1_vite@7.1.6__picomatch@4.0.3",
@@ -291,6 +293,22 @@
         "@eslint/core",
         "levn"
       ]
+    },
+    "@floating-ui/core@1.7.3": {
+      "integrity": "sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==",
+      "dependencies": [
+        "@floating-ui/utils"
+      ]
+    },
+    "@floating-ui/dom@1.7.4": {
+      "integrity": "sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==",
+      "dependencies": [
+        "@floating-ui/core",
+        "@floating-ui/utils"
+      ]
+    },
+    "@floating-ui/utils@0.2.10": {
+      "integrity": "sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ=="
     },
     "@humanfs/core@0.19.1": {
       "integrity": "sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA=="
@@ -838,6 +856,9 @@
         "@zag-js/utils"
       ]
     },
+    "@zag-js/aria-hidden@1.24.1": {
+      "integrity": "sha512-R/a80ZjITZi4rotN7Q9+RTCYCdmJZf3rZi9bObczbR7h5j5GSsjikByUjksWAYzPvFxQxBWTs4GqlCI9dU2f9A=="
+    },
     "@zag-js/avatar@1.24.1": {
       "integrity": "sha512-zYGUdkxsMoN8OAFYYCZBrsQx++kjWEBdYZew4en9g8vw7yonNjzywtfF/Vd3Dv6mUZ2r5JtaltbK/qp4aBdZvg==",
       "dependencies": [
@@ -859,10 +880,38 @@
         "@zag-js/utils"
       ]
     },
+    "@zag-js/collection@1.24.1": {
+      "integrity": "sha512-aWNDI0iZ5Wb8vCZLJWPjRQOK5/B2wvhhR1+pYaScxZfWy2das2DVKam8tnR0p1GrRfBi/kZNaCXtvM1ZNPjlOQ==",
+      "dependencies": [
+        "@zag-js/utils"
+      ]
+    },
+    "@zag-js/combobox@1.24.1": {
+      "integrity": "sha512-BhjQOL/Ssr5lQLPCyEersCqOqllFlNuR8nvQOgl1u8Y0EaZR+ZPQbgXum6kE5AuH3SlcY9+1kDK1ZLswOagL1Q==",
+      "dependencies": [
+        "@zag-js/anatomy",
+        "@zag-js/aria-hidden",
+        "@zag-js/collection",
+        "@zag-js/core",
+        "@zag-js/dismissable",
+        "@zag-js/dom-query",
+        "@zag-js/popper",
+        "@zag-js/types",
+        "@zag-js/utils"
+      ]
+    },
     "@zag-js/core@1.24.1": {
       "integrity": "sha512-0e7QdxBaY9PMHQfDY/Xu/7MKyRxNsriNscpkZI7L4MHMGPmxdfedGBpteI3gFfqWsdJ5NvvpqxdLUwkbYk5Q5A==",
       "dependencies": [
         "@zag-js/dom-query",
+        "@zag-js/utils"
+      ]
+    },
+    "@zag-js/dismissable@1.24.1": {
+      "integrity": "sha512-Oca+nbwaqHGt0rmkKfmpExwL+kVYLbVi6fxhzHP1WBrip//IUThoTrPH/gqB51o1DT1z/VNE+8BhWhsHSgkQfw==",
+      "dependencies": [
+        "@zag-js/dom-query",
+        "@zag-js/interact-outside",
         "@zag-js/utils"
       ]
     },
@@ -876,6 +925,21 @@
       "integrity": "sha512-HzUf8cRl5tbIil6rVe24CxC3s1pdFGpfYSt5NyaFoFd0HuWhobp+De1kVUvlLU0DDUU6Kgw6DB1w8APEPzb8gg==",
       "dependencies": [
         "@zag-js/dom-query"
+      ]
+    },
+    "@zag-js/interact-outside@1.24.1": {
+      "integrity": "sha512-xKyGT295WVrlJaOPCVBrundlXqL4YEvl36SHNSi7EZs/AYpzxR/aBtnFCRN1/7nWvdqvfGs7ya0kl/ly0H7VBg==",
+      "dependencies": [
+        "@zag-js/dom-query",
+        "@zag-js/utils"
+      ]
+    },
+    "@zag-js/popper@1.24.1": {
+      "integrity": "sha512-VWbOjBy/haIDmXhwfyMT1rRcQhSfYmPX67YzQwLA7863kXkoTH1r9fR+1f9uq3VuXQLhw2Cg/lkSzlkg9TIp+g==",
+      "dependencies": [
+        "@floating-ui/dom",
+        "@zag-js/dom-query",
+        "@zag-js/utils"
       ]
     },
     "@zag-js/rect-utils@1.24.1": {
@@ -1768,6 +1832,11 @@
       "packages/checkbox": {
         "dependencies": [
           "npm:@zag-js/checkbox@^1.24.1"
+        ]
+      },
+      "packages/combobox": {
+        "dependencies": [
+          "npm:@zag-js/combobox@^1.24.1"
         ]
       },
       "packages/lib": {

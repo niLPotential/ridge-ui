@@ -1,0 +1,8 @@
+{
+  "name": "@ridge-ui/combobox",
+  "version": "0.0.0",
+  "exports": "./mod.ts",
+  "imports": {
+    "@zag-js/combobox": "npm:@zag-js/combobox@^1.24.1"
+  }
+}
