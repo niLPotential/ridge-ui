@@ -4,7 +4,7 @@
   "exports": "./mod.ts",
   "license": "MIT",
   "imports": {
-    "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.23.0",
-    "@zag-js/utils": "npm:@zag-js/utils@^1.23.0"
+    "@zag-js/anatomy": "npm:@zag-js/anatomy@^1.24.1",
+    "@zag-js/utils": "npm:@zag-js/utils@^1.24.1"
   }
 }
