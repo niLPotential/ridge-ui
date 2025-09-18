@@ -116,5 +116,5 @@ app.get(
 
 export default {
   fetch: app.fetch,
-  prerender: ["/", "/accordion/", "/angle-slider/", "avatar", "/checkbox/"],
+  prerender: ["/", "/accordion/", "/angle-slider/", "/avatar/", "/checkbox/"],
 };
