@@ -3,6 +3,6 @@
   "version": "0.0.7",
   "exports": "./mod.ts",
   "imports": {
-    "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.23.0"
+    "@zag-js/checkbox": "npm:@zag-js/checkbox@^1.24.1"
   }
 }
