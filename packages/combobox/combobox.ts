@@ -1,7 +1,11 @@
 // import {} from "@zag-js/popper";
+import { ariaAttr, dataAttr } from "@zag-js/dom-query";
+// import type { EventKeyMap } from "@zag-js/types";
 import * as combobox from "@zag-js/combobox";
 import { AlpineMachine } from "@ridge-ui/lib";
 import * as dom from "./dom.ts";
+
+const parts = combobox.anatomy.build();
 
 export class Combobox extends AlpineMachine<any> implements combobox.Api {
   constructor(userProps: Partial<combobox.Props>) {
@@ -11,7 +15,7 @@ export class Combobox extends AlpineMachine<any> implements combobox.Api {
   private get translations() {
     return this.prop("translations");
   }
-  private get collection() {
+  get collection() {
     return this.prop("collection");
   }
 
@@ -96,12 +100,215 @@ export class Combobox extends AlpineMachine<any> implements combobox.Api {
     (value != null)
       ? this.send({ type: "ITEM.CLEAR", value })
       : this.send({ type: "VALUE.CLEAR" });
-  //   focus() {
-  //     dom.getInputEl(this.scope)?.focus();
-  //   }
+  focus() {
+    dom.getInputEl(this.scope)?.focus();
+  }
   setOpen(nextOpen: any, reason = "script") {
     const open = this.state.hasTag("open");
     if (open === nextOpen) return;
     this.send({ type: nextOpen ? "OPEN" : "CLOSE", src: reason });
+  }
+
+  getRootProps() {
+    return {
+      ...parts.root.attrs,
+      dir: this.prop("dir"),
+      id: dom.getRootId(this.scope),
+      ":data-invalid": () => dataAttr(this.invalid),
+      ":data-readonly": () => dataAttr(this.readOnly),
+    };
+  }
+
+  getLabelProps() {
+    return {
+      ...parts.label.attrs,
+      dir: this.prop("dir"),
+      htmlFor: dom.getInputId(this.scope),
+      id: dom.getLabelId(this.scope),
+      ":data-readonly": () => dataAttr(this.readOnly),
+      ":data-disabled": () => dataAttr(this.disabled),
+      ":data-invalid": () => dataAttr(this.invalid),
+      ":data-required": () => dataAttr(this.required),
+      ":data-focus": () => dataAttr(this.focused),
+      "@click": (event: any) => {
+        if (this.composite) return;
+        event.preventDefault();
+        dom.getTriggerEl(this.scope)?.focus({ preventScroll: true });
+      },
+    };
+  }
+
+  getControlProps() {
+    return {
+      ...parts.control.attrs,
+      dir: this.prop("dir"),
+      id: dom.getControlId(this.scope),
+      ":data-state": () => this.open ? "open" : "closed",
+      ":data-focus": () => dataAttr(this.focused),
+      ":data-disabled": () => dataAttr(this.disabled),
+      ":data-invalid": () => dataAttr(this.invalid),
+    };
+  }
+
+  getPositionerProps() {
+    return {
+      ...parts.positioner.attrs,
+      dir: this.prop("dir"),
+      id: dom.getPositionerId(this.scope),
+      //   style: popperStyles.floating,
+    };
+  }
+
+  getInputProps() {
+    return {
+      ...parts.input.attrs,
+      dir: this.prop("dir"),
+      "aria-invalid": ariaAttr(this.invalid),
+      "data-invalid": dataAttr(this.invalid),
+      "data-autofocus": dataAttr(this.prop("autoFocus")),
+      name: this.prop("name"),
+      form: this.prop("form"),
+      disabled: this.disabled,
+      required: this.prop("required"),
+      autoComplete: "off",
+      autoCorrect: "off",
+      autoCapitalize: "none",
+      spellCheck: "false",
+      readOnly: this.readOnly,
+      placeholder: this.prop("placeholder"),
+      id: dom.getInputId(this.scope),
+      type: "text",
+      role: "combobox",
+      defaultValue: this.context.get("inputValue"),
+      "aria-autocomplete": this.computed("autoComplete") ? "both" : "list",
+      "aria-controls": dom.getContentId(this.scope),
+      "aria-expanded": open,
+      "data-state": this.open ? "open" : "closed",
+      "aria-activedescendant": this.highlightedValue
+        ? dom.getItemId(this.scope, this.highlightedValue)
+        : undefined,
+      "@click": (event: any) => {
+        if (event.defaultPrevented) return;
+        if (!this.prop("openOnClick")) return;
+        if (!this.interactive) return;
+        this.send({ type: "INPUT.CLICK", src: "input-click" });
+      },
+      "@focus": () => {
+        if (this.disabled) return;
+        this.send({ type: "INPUT.FOCUS" });
+      },
+      "@blur": () => {
+        if (this.disabled) return;
+        this.send({ type: "INPUT.BLUR" });
+      },
+      "@change": (event: any) => {
+        this.send({
+          type: "INPUT.CHANGE",
+          value: event.currentTarget.value,
+          src: "input-change",
+        });
+      },
+      // "@keydown":(event:any)=> {
+      //   if (event.defaultPrevented) return
+      //   if (!this.interactive) return
+
+      //   if (event.ctrlKey || event.shiftKey || isComposingEvent(event)) return
+
+      //   const openOnKeyPress = this.prop("openOnKeyPress")
+      //   const isModifierKey = event.ctrlKey || event.metaKey || event.shiftKey
+      //   const keypress = true
+
+      //   const keymap: EventKeyMap = {
+      //     ArrowDown(event: any) {
+      //       if (!openOnKeyPress && !open) return
+      //       this.send({ type: event.altKey ? "OPEN" : "INPUT.ARROW_DOWN", keypress, src: "arrow-key" })
+      //       event.preventDefault()
+      //     },
+      //     ArrowUp() {
+      //       if (!openOnKeyPress && !open) return
+      //       send({ type: event.altKey ? "CLOSE" : "INPUT.ARROW_UP", keypress, src: "arrow-key" })
+      //       event.preventDefault()
+      //     },
+      //     Home(event) {
+      //       if (isModifierKey) return
+      //       send({ type: "INPUT.HOME", keypress })
+      //       if (open) {
+      //         event.preventDefault()
+      //       }
+      //     },
+      //     End(event) {
+      //       if (isModifierKey) return
+      //       send({ type: "INPUT.END", keypress })
+      //       if (open) {
+      //         event.preventDefault()
+      //       }
+      //     },
+      //     Enter(event) {
+      //       send({ type: "INPUT.ENTER", keypress, src: "item-select" })
+
+      //       // when there's a form owner, allow submitting custom value if `allowCustomValue` is true
+      //       const submittable = computed("isCustomValue") && prop("allowCustomValue")
+      //       // Also allow submission when there's no highlighted item (bug fix)
+      //       const hasHighlight = highlightedValue != null
+      //       // Allow submission when alwaysSubmitOnEnter is true
+      //       const alwaysSubmit = prop("alwaysSubmitOnEnter")
+
+      //       if (open && !submittable && !alwaysSubmit && hasHighlight) {
+      //         event.preventDefault()
+      //       }
+
+      //       if (highlightedValue == null) return
+
+      //       const itemEl = dom.getItemEl(scope, highlightedValue)
+      //       if (isAnchorElement(itemEl)) {
+      //         prop("navigate")?.({ value: highlightedValue, node: itemEl, href: itemEl.href })
+      //       }
+      //     },
+      //     Escape() {
+      //       send({ type: "INPUT.ESCAPE", keypress, src: "escape-key" })
+      //       event.preventDefault()
+      //     },
+      //   }
+
+      //   const key = getEventKey(event, { dir: prop("dir") })
+      //   const exec = keymap[key]
+      //   exec?.(event)
+    };
+  }
+
+  getTriggerProps() {
+    return {};
+  }
+
+  getContentProps() {
+    return {};
+  }
+
+  getListProps() {
+    return {};
+  }
+
+  getClearTriggerProps() {
+    return {};
+  }
+
+  getItemProps(props: combobox.ItemProps) {
+    return {};
+  }
+
+  getItemTextProps(props: combobox.ItemProps) {
+    return {};
+  }
+
+  getItemIndicatorProps(props: combobox.ItemProps) {
+    return {};
+  }
+
+  getItemGroupProps(props: combobox.ItemGroupProps) {
+    return {};
+  }
+
+  getItemGroupLabelProps(props: combobox.ItemGroupLabelProps) {
+    return {};
   }
 }
