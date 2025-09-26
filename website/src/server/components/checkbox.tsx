@@ -1,6 +1,6 @@
 export default function CheckboxDemo() {
   return (
-    <div x-data="{props: {disabled: false, invalid: false}}">
+    <div x-data="{props: {disabled: true, invalid: false}}">
       <div>
         <input type="checkbox" id="disabled" x-model="props.disabled" />
         <label for="disabled">disabled</label>
@@ -9,8 +9,9 @@ export default function CheckboxDemo() {
         <input type="checkbox" id="invalid" x-model="props.invalid" />
         <label for="invalid">invalid</label>
       </div>
+      <p x-text="props.disabled"></p>
       <label
-        x-checkbox="{id: 37}"
+        x-checkbox="{...props, id: 37}"
         x-checkbox:root
         class="flex flex-row select-none gap-2 text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
       >
@@ -21,7 +22,7 @@ export default function CheckboxDemo() {
         </div>
         <span x-checkbox:label>
           Input is
-          <span x-text="checked ? ' checked' : ' unchecked'"></span>
+          <span x-text="$checkbox.checked ? ' checked' : ' unchecked'"></span>
         </span>
         <input x-checkbox:hidden-input />
       </label>
