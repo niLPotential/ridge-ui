@@ -1,4 +1,4 @@
-import { dataAttr } from "@zag-js/dom-query";
+import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
 import * as checkbox from "@zag-js/checkbox";
 import {
   getControlId,
@@ -96,5 +96,71 @@ function handleRoot(el: ElementWithXAttributes, Alpine: Alpine) {
     },
     "@click":
       "$event.target === $refs['hidden-input'] && $event.stopPropagation()",
+  });
+}
+
+function handleLabel(el: ElementWithXAttributes, Alpine: Alpine) {
+  Alpine.bind(el, {
+    ...parts.label.attrs,
+    ...this.$data.dataAttrs,
+    dir: this.$data.__prop("dir"),
+    id: getLabelId(this.$data.__scope),
+  });
+}
+
+function handleControl(el: ElementWithXAttributes, Alpine: Alpine) {
+  Alpine.bind(el, {
+    ...parts.control.attrs,
+    ...this.$data.dataAttrs,
+    dir: this.$data.prop("dir"),
+    id: getControlId(this.$data.scope),
+    "aria-hidden": true,
+  });
+}
+
+function handleIndicator(el: ElementWithXAttributes, Alpine: Alpine) {
+  Alpine.bind(el, {
+    ...parts.indicator.attrs,
+    ...this.$data.dataAttrs,
+    dir: this.$data.prop("dir"),
+    hidden: !this.$data.indeterminate && !this.$data.checked,
+  });
+}
+
+function handleHiddenInput(el: ElementWithXAttributes, Alpine: Alpine) {
+  Alpine.bind(el, {
+    id: getHiddenInputId(this.$data.scope),
+    type: "checkbox",
+    required: this.$data.prop("required"),
+    defaultChecked: this.$data.checked,
+    disabled: this.$data.disabled,
+    "aria-labelledby": getLabelId(this.$data.scope),
+    "aria-invalid": this.$data.invalid,
+    name: this.$data.prop("name"),
+    form: this.$data.prop("form"),
+    value: this.$data.prop("value"),
+    ":style": () => visuallyHiddenStyle,
+    "@focus"() {
+      const focusVisible = this.$data.isFocusVisible();
+      this.$data.send({
+        type: "CONTEXT.SET",
+        context: { focused: true, focusVisible },
+      });
+    },
+    "@blur"() {
+      this.$data.send({
+        type: "CONTEXT.SET",
+        context: { focused: false, focusVisible: false },
+      });
+    },
+    "@click"(event: any) {
+      if (this.$data.readOnly) {
+        event.preventDefault();
+        return;
+      }
+
+      const checked = event.currentTarget.checked;
+      this.$data.send({ type: "CHECKED.SET", checked, isTrusted: true });
+    },
   });
 }
