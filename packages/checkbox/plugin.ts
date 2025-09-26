@@ -19,22 +19,22 @@ import { AlpineMachine } from "@ridge-ui/lib";
 const parts = checkbox.anatomy.build();
 
 export default function (Alpine: Alpine) {
-  Alpine.directive("checkbox", (el, directive) => {
-    if (!directive.value) handleApi(el, Alpine);
+  Alpine.directive("checkbox", (el, directive, { evaluate }) => {
+    if (!directive.value) handleApi(el, Alpine, evaluate(directive.expression));
     else if (directive.value === "root") handleRoot(el, Alpine);
-    else if (directive.value === "lable") handleLabel(el, Alpine);
+    else if (directive.value === "label") handleLabel(el, Alpine);
     else if (directive.value === "control") handleControl(el, Alpine);
     else if (directive.value === "indicator") handleIndicator(el, Alpine);
     else if (directive.value === "hidden-input") handleHiddenInput(el, Alpine);
   }).before("bind");
 }
 
-function handleApi(el: ElementWithXAttributes, Alpine: Alpine) {
+function handleApi(el: ElementWithXAttributes, Alpine: Alpine, userProps: any) {
   Alpine.bind(el, {
     "x-data"() {
       const { send, context, prop, computed, scope } = new AlpineMachine(
         checkbox.machine,
-        Alpine.$data(el),
+        userProps,
       );
       const disabled = !!prop("disabled");
       const readOnly = !!prop("readOnly");
