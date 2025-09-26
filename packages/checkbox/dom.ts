@@ -7,3 +7,6 @@ export const getControlId = (ctx: Scope) =>
   ctx.ids?.control ?? `checkbox:${ctx.id}:control`;
 export const getHiddenInputId = (ctx: Scope) =>
   ctx.ids?.hiddenInput ?? `checkbox:${ctx.id}:input`;
+export const getRootEl = (ctx: Scope) => ctx.getById(getRootId(ctx));
+export const getHiddenInputEl = (ctx: Scope) =>
+  ctx.getById<HTMLInputElement>(getHiddenInputId(ctx));

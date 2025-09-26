@@ -1,7 +1,14 @@
-import { dataAttr, visuallyHiddenStyle } from "@zag-js/dom-query";
+import {
+  dataAttr,
+  getEventTarget,
+  visuallyHiddenStyle,
+} from "@zag-js/dom-query";
+import { isFocusVisible } from "@zag-js/focus-visible";
+
 import * as checkbox from "@zag-js/checkbox";
 import {
   getControlId,
+  getHiddenInputEl,
   getHiddenInputId,
   getLabelId,
   getRootId,
@@ -13,11 +20,12 @@ const parts = checkbox.anatomy.build();
 
 export default function (Alpine: Alpine) {
   Alpine.directive("checkbox", (el, directive) => {
-    if (!directive.value) {
-      handleApi(el, Alpine);
-    } else if (directive.value === "root") {
-      handleRoot(el, Alpine);
-    }
+    if (!directive.value) handleApi(el, Alpine);
+    else if (directive.value === "root") handleRoot(el, Alpine);
+    else if (directive.value === "lable") handleLabel(el, Alpine);
+    else if (directive.value === "control") handleControl(el, Alpine);
+    else if (directive.value === "indicator") handleIndicator(el, Alpine);
+    else if (directive.value === "hidden-input") handleHiddenInput(el, Alpine);
   }).before("bind");
 }
 
@@ -74,6 +82,8 @@ function handleApi(el: ElementWithXAttributes, Alpine: Alpine) {
         "__prop": prop,
         "__scope": scope,
         "__send": send,
+        "__invalid": invalid,
+        "__readOnly": readOnly,
       };
     },
   });
@@ -82,27 +92,31 @@ function handleApi(el: ElementWithXAttributes, Alpine: Alpine) {
 function handleRoot(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.root.attrs,
-    ...this.$data.dataAttrs,
+    ...this.$data.__dataAttrs,
     dir: this.$data.__prop("dir"),
     id: getRootId(this.$data.__scope),
     for: getHiddenInputId(this.$data.__scope),
     "@pointermove": () => {
       if (this.$data.disabled) return;
-      this.$data.send({ type: "CONTEXT.SET", context: { hovered: true } });
+      this.$data.__send({ type: "CONTEXT.SET", context: { hovered: true } });
     },
     "@pointerleave": () => {
       if (this.$data.disabled) return;
-      this.$data.send({ type: "CONTEXT.SET", context: { hovered: false } });
+      this.$data.__send({ type: "CONTEXT.SET", context: { hovered: false } });
     },
-    "@click":
-      "$event.target === $refs['hidden-input'] && $event.stopPropagation()",
+    "@click": (event) => {
+      const target = getEventTarget<Element>(event);
+      if (target === getHiddenInputEl(this.$data.__scope)) {
+        event.stopPropagation();
+      }
+    },
   });
 }
 
 function handleLabel(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.label.attrs,
-    ...this.$data.dataAttrs,
+    ...this.$data.__dataAttrs,
     dir: this.$data.__prop("dir"),
     id: getLabelId(this.$data.__scope),
   });
@@ -111,9 +125,9 @@ function handleLabel(el: ElementWithXAttributes, Alpine: Alpine) {
 function handleControl(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.control.attrs,
-    ...this.$data.dataAttrs,
-    dir: this.$data.prop("dir"),
-    id: getControlId(this.$data.scope),
+    ...this.$data.__dataAttrs,
+    dir: this.$data.__prop("dir"),
+    id: getControlId(this.$data.__scope),
     "aria-hidden": true,
   });
 }
@@ -121,46 +135,46 @@ function handleControl(el: ElementWithXAttributes, Alpine: Alpine) {
 function handleIndicator(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.indicator.attrs,
-    ...this.$data.dataAttrs,
-    dir: this.$data.prop("dir"),
+    ...this.$data.__dataAttrs,
+    dir: this.$data.__prop("dir"),
     hidden: !this.$data.indeterminate && !this.$data.checked,
   });
 }
 
 function handleHiddenInput(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
-    id: getHiddenInputId(this.$data.scope),
+    id: getHiddenInputId(this.$data.__scope),
     type: "checkbox",
-    required: this.$data.prop("required"),
+    required: this.$data.__prop("required"),
     defaultChecked: this.$data.checked,
     disabled: this.$data.disabled,
-    "aria-labelledby": getLabelId(this.$data.scope),
-    "aria-invalid": this.$data.invalid,
-    name: this.$data.prop("name"),
-    form: this.$data.prop("form"),
-    value: this.$data.prop("value"),
+    "aria-labelledby": getLabelId(this.$data.__scope),
+    "aria-invalid": this.$data.__invalid,
+    name: this.$data.__prop("name"),
+    form: this.$data.__prop("form"),
+    value: this.$data.__prop("value"),
     ":style": () => visuallyHiddenStyle,
     "@focus"() {
-      const focusVisible = this.$data.isFocusVisible();
-      this.$data.send({
+      const focusVisible = isFocusVisible();
+      this.$data.__send({
         type: "CONTEXT.SET",
         context: { focused: true, focusVisible },
       });
     },
     "@blur"() {
-      this.$data.send({
+      this.$data.__send({
         type: "CONTEXT.SET",
         context: { focused: false, focusVisible: false },
       });
     },
     "@click"(event: any) {
-      if (this.$data.readOnly) {
+      if (this.$data.__readOnly) {
         event.preventDefault();
         return;
       }
 
       const checked = event.currentTarget.checked;
-      this.$data.send({ type: "CHECKED.SET", checked, isTrusted: true });
+      this.$data.__send({ type: "CHECKED.SET", checked, isTrusted: true });
     },
   });
 }

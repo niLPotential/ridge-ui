@@ -13,6 +13,7 @@
     "npm:@zag-js/checkbox@^1.24.2": "1.24.2",
     "npm:@zag-js/core@^1.24.2": "1.24.2",
     "npm:@zag-js/dom-query@^1.24.2": "1.24.2",
+    "npm:@zag-js/focus-visible@^1.24.2": "1.24.2",
     "npm:@zag-js/utils@^1.24.2": "1.24.2",
     "npm:alpinejs@^3.15.0": "3.15.0",
     "npm:domco@^4.3.1": "4.3.1_vite@7.1.7__picomatch@4.0.3",
@@ -1753,6 +1754,7 @@
       "npm:@types/alpinejs@^3.13.11",
       "npm:@zag-js/core@^1.24.2",
       "npm:@zag-js/dom-query@^1.24.2",
+      "npm:@zag-js/focus-visible@^1.24.2",
       "npm:alpinejs@^3.15.0"
     ],
     "members": {
