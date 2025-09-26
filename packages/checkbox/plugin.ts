@@ -48,19 +48,16 @@ function handleApi(el: ElementWithXAttributes, Alpine: Alpine, userProps: any) {
       const indeterminate = computed("indeterminate");
 
       const dataAttrs = {
-        "data-active": dataAttr(context.get("active")),
-        "data-focus": dataAttr(focused),
-        "data-focus-visible": dataAttr(focusVisible),
-        "data-readonly": dataAttr(readOnly),
-        "data-hover": dataAttr(context.get("hovered")),
-        "data-disabled": dataAttr(disabled),
-        "data-state": indeterminate
-          ? "indeterminate"
-          : checked
-          ? "checked"
-          : "unchecked",
-        "data-invalid": dataAttr(invalid),
-        "data-required": dataAttr(required),
+        ":data-active": () => dataAttr(context.get("active")),
+        ":data-focus": () => dataAttr(focused),
+        ":data-focus-visible": () => dataAttr(focusVisible),
+        ":data-readonly": () => dataAttr(readOnly),
+        ":data-hover": () => dataAttr(context.get("hovered")),
+        ":data-disabled": () => dataAttr(disabled),
+        ":data-state": () =>
+          indeterminate ? "indeterminate" : checked ? "checked" : "unchecked",
+        ":data-invalid": () => dataAttr(invalid),
+        ":data-required": () => dataAttr(required),
       };
       return {
         checked,
@@ -78,7 +75,6 @@ function handleApi(el: ElementWithXAttributes, Alpine: Alpine, userProps: any) {
             isTrusted: false,
           });
         },
-        "__dataAttrs": dataAttrs,
         "__prop": prop,
         "__scope": scope,
         "__send": send,
@@ -92,19 +88,19 @@ function handleApi(el: ElementWithXAttributes, Alpine: Alpine, userProps: any) {
 function handleRoot(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.root.attrs,
-    ...this.$data.__dataAttrs,
-    dir: this.$data.__prop("dir"),
-    id: getRootId(this.$data.__scope),
-    for: getHiddenInputId(this.$data.__scope),
-    "@pointermove": () => {
+    // ...this.$data.__dataAttrs,
+    // dir: this.$data.__prop("dir"),
+    // id: getRootId(this.$data.__scope),
+    // for: getHiddenInputId(this.$data.__scope),
+    "@pointermove"() {
       if (this.$data.disabled) return;
       this.$data.__send({ type: "CONTEXT.SET", context: { hovered: true } });
     },
-    "@pointerleave": () => {
+    "@pointerleave"() {
       if (this.$data.disabled) return;
       this.$data.__send({ type: "CONTEXT.SET", context: { hovered: false } });
     },
-    "@click": (event) => {
+    "@click"(event) {
       const target = getEventTarget<Element>(event);
       if (target === getHiddenInputEl(this.$data.__scope)) {
         event.stopPropagation();
@@ -116,43 +112,43 @@ function handleRoot(el: ElementWithXAttributes, Alpine: Alpine) {
 function handleLabel(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.label.attrs,
-    ...this.$data.__dataAttrs,
-    dir: this.$data.__prop("dir"),
-    id: getLabelId(this.$data.__scope),
+    // ...this.$data.__dataAttrs,
+    // dir: this.$data.__prop("dir"),
+    // id: getLabelId(this.$data.__scope),
   });
 }
 
 function handleControl(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.control.attrs,
-    ...this.$data.__dataAttrs,
-    dir: this.$data.__prop("dir"),
-    id: getControlId(this.$data.__scope),
-    "aria-hidden": true,
+    // ...this.$data.__dataAttrs,
+    // dir: this.$data.__prop("dir"),
+    // id: getControlId(this.$data.__scope),
+    ":aria-hidden": () => true,
   });
 }
 
 function handleIndicator(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.indicator.attrs,
-    ...this.$data.__dataAttrs,
-    dir: this.$data.__prop("dir"),
-    hidden: !this.$data.indeterminate && !this.$data.checked,
+    // ...this.$data.__dataAttrs,
+    // dir: this.$data.__prop("dir"),
+    // hidden: !this.$data.indeterminate && !this.$data.checked,
   });
 }
 
 function handleHiddenInput(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
-    id: getHiddenInputId(this.$data.__scope),
+    // id: getHiddenInputId(this.$data.__scope),
     type: "checkbox",
-    required: this.$data.__prop("required"),
-    defaultChecked: this.$data.checked,
-    disabled: this.$data.disabled,
-    "aria-labelledby": getLabelId(this.$data.__scope),
-    "aria-invalid": this.$data.__invalid,
-    name: this.$data.__prop("name"),
-    form: this.$data.__prop("form"),
-    value: this.$data.__prop("value"),
+    // required: this.$data.__prop("required"),
+    // defaultChecked: this.$data.checked,
+    // disabled: this.$data.disabled,
+    // "aria-labelledby": getLabelId(this.$data.__scope),
+    // "aria-invalid": this.$data.__invalid,
+    // name: this.$data.__prop("name"),
+    // form: this.$data.__prop("form"),
+    // value: this.$data.__prop("value"),
     ":style": () => visuallyHiddenStyle,
     "@focus"() {
       const focusVisible = isFocusVisible();

@@ -17,9 +17,11 @@
     "npm:@zag-js/utils@^1.24.2": "1.24.2",
     "npm:alpinejs@^3.15.0": "3.15.0",
     "npm:domco@^4.3.1": "4.3.1_vite@7.1.7__picomatch@4.0.3",
+    "npm:eslint@9.36.0": "9.36.0",
     "npm:eslint@^9.36.0": "9.36.0",
     "npm:typescript-eslint@^8.44.1": "8.44.1_eslint@9.36.0_typescript@5.9.2_@typescript-eslint+parser@8.44.1__eslint@9.36.0__typescript@5.9.2",
     "npm:unocss@^66.5.2": "66.5.2_vite@7.1.7__picomatch@4.0.3",
+    "npm:vite@7.1.7": "7.1.7_picomatch@4.0.3",
     "npm:vite@^7.1.7": "7.1.7_picomatch@4.0.3"
   },
   "jsr": {
