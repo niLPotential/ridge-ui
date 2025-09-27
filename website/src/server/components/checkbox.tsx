@@ -15,6 +15,7 @@ export default function CheckboxDemo() {
         x-checkbox:root
         class="flex flex-row select-none gap-2 text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
       >
+        <p x-text="$checkbox.disabled"></p>
         <div
           x-checkbox:control
           class="h-24px w-24px border-2 border-blue rounded-0.275rem border-solid text-white data-[disabled]:(border-black bg-black) data-[invalid]:border-red data-[state=checked]:(border-blue bg-blue) data-[state=indeterminate]:(border-yellow bg-white text-yellow) data-[hover]:bg-gray data-[focus]:(outline-2 outline-blue outline-offset-2 outline-solid)"
