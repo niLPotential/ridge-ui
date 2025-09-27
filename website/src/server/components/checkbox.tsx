@@ -9,7 +9,6 @@ export default function CheckboxDemo() {
         <input type="checkbox" id="invalid" x-model="props.invalid" />
         <label for="invalid">invalid</label>
       </div>
-      <p x-text="props.disabled"></p>
       <label
         x-checkbox="{...props, id: 37}"
         x-checkbox:root
