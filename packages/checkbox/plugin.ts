@@ -20,11 +20,17 @@ export default function (Alpine: Alpine) {
     (el, { value, expression }, { evaluate, evaluateLater, effect }) => {
       if (!value) {
         Alpine.bind(el, {
-          "x-data": () => ({ checkbox: new Checkbox(evaluate(expression)) }),
+          "x-data": () => ({
+            props: evaluate(expression),
+            checkbox: new Checkbox(this.props),
+          }),
+          "x-init": () => {
+            Alpine.$data(el).checkbox.init();
+          },
         });
         effect(() => {
           evaluateLater(expression)((props: any) => {
-            Alpine.$data(el).checkbox = new Checkbox(props);
+            Alpine.$data(el).props = props;
           });
         });
       } else if (value === "root") handleRootProps(el, Alpine);
