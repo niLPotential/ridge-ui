@@ -82,7 +82,7 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
   }
 
   private debug(...args: any[]) {
-    console.log(...args);
+    if (this.machine.debug) console.log(...args);
   }
 
   constructor(private machine: Machine<T>, userProps: Partial<T["props"]>) {
