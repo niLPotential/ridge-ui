@@ -11,8 +11,10 @@ export const parts = checkbox.anatomy.build();
  * ```
  */
 export class Checkbox extends AlpineMachine<checkbox.Schema> {
-  constructor(userProps: Partial<checkbox.Props>) {
-    super(checkbox.machine, userProps);
+  constructor(
+    evaluateProps: (callback: (value: Partial<checkbox.Props>) => void) => void,
+  ) {
+    super(checkbox.machine, evaluateProps);
   }
 
   get __disabled() {

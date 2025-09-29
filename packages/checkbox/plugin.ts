@@ -17,21 +17,15 @@ import {
 export default function (Alpine: Alpine) {
   Alpine.directive(
     "checkbox",
-    (el, { value, expression }, { evaluateLater, effect }) => {
+    (el, { value, expression }, { evaluateLater }) => {
       if (!value) {
         Alpine.bind(el, {
-          "x-modelable": "checkbox",
           "x-data": () => ({
-            checkbox: new Checkbox({}),
+            checkbox: new Checkbox(evaluateLater(expression)),
           }),
           "x-init"() {
             this.$data.checkbox.init();
           },
-        });
-        effect(() => {
-          evaluateLater(expression)(function (props: any) {
-            this.$data.checkbox = new Checkbox(props);
-          });
         });
       } else if (value === "root") handleRootProps(el, Alpine);
       else if (value === "label") handleLabelProps(el, Alpine);
