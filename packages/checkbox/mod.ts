@@ -1,16 +1,17 @@
 /**
- * Zag Checkbox component with Alpine.js
+ * Alpine.js plugin for Zag Checkbox component
  *
  * @example
  * ```ts
  * import Alpine from "alpinejs";
- * import { Checkbox } from "@ridge-ui/checkbox";
+ * import Checkbox from "@ridge-ui/checkbox";
  *
- * Alpine.data("checkbox", (userProps: any) => new Checkbox(userProps));
+ * Alpine.plugin(Checkbox);
  * globalThis.Alpine = Alpine;
  * Alpine.start();
  * ```
  *
  * @module
  */
-export { Checkbox } from "./checkbox.ts";
+import Checkbox from "./plugin.ts";
+export default Checkbox;

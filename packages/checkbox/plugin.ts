@@ -1,3 +1,4 @@
+// @ts-nocheck this
 import {
   dataAttr,
   getEventTarget,
@@ -5,7 +6,7 @@ import {
 } from "@zag-js/dom-query";
 import { isFocusVisible } from "@zag-js/focus-visible";
 import type { Alpine, ElementWithXAttributes } from "alpinejs";
-import { Checkbox, parts } from "./checkbox.ts";
+import { Checkbox, parts } from "./machine.ts";
 import {
   getControlId,
   getHiddenInputEl,

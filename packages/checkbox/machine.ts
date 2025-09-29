@@ -3,13 +3,6 @@ import { AlpineMachine } from "@ridge-ui/lib";
 
 export const parts = checkbox.anatomy.build();
 
-/**
- * Ridge UI checkbox component
- *
- * ```ts
- * Alpine.data("checkbox", (userProps: any) => new Checkbox(userProps));
- * ```
- */
 export class Checkbox extends AlpineMachine<checkbox.Schema> {
   constructor(
     evaluateProps: (callback: (value: Partial<checkbox.Props>) => void) => void,
