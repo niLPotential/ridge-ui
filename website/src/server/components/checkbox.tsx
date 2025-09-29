@@ -14,7 +14,7 @@ export default function CheckboxDemo() {
         x-checkbox:root
         class="flex flex-row select-none gap-2 text-lg data-[disabled]:(cursor-not-allowed opacity-40)"
       >
-        <p x-text="props.disabled"></p>
+        <p x-text="disabled"></p>
         <p x-text="$checkbox.disabled"></p>
         <div
           x-checkbox:control
