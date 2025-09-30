@@ -12,7 +12,7 @@ export default function (Alpine: Alpine) {
           };
         },
         "x-init"() {
-          this.$data.avatar.init();
+          (this.$data.avatar as Avatar).init();
         },
       } as any);
     } else if (value === "root") handleRootProps(el, Alpine);
@@ -21,7 +21,7 @@ export default function (Alpine: Alpine) {
   }).before("bind");
 
   Alpine.magic("avatar", (el, { Alpine }) => {
-    const { avatar } = Alpine.$data(el) as any;
+    const { avatar } = Alpine.$data(el) as { avatar: Avatar };
 
     return {
       get loaded() {
@@ -45,10 +45,10 @@ function handleRootProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.root.attrs,
     ":dir"() {
-      return this.$data.avatar.prop("dir");
+      return (this.$data.avatar as Avatar).prop("dir");
     },
     ":id"() {
-      return getRootId(this.$data.avatar.scope);
+      return getRootId((this.$data.avatar as Avatar).scope);
     },
   } as any);
 }
@@ -57,22 +57,25 @@ function handleImageProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.image.attrs,
     ":hidden"() {
-      return !this.$data.avatar.__loaded;
+      return !(this.$data.avatar as Avatar).__loaded;
     },
     ":dir"() {
-      return this.$data.avatar.prop("dir");
+      return (this.$data.avatar as Avatar).prop("dir");
     },
     ":id"() {
-      return getImageId(this.$data.avatar.scope);
+      return getImageId((this.$data.avatar as Avatar).scope);
     },
     ":data-state"() {
-      return this.$data.avatar.__loaded ? "visible" : "hidden";
+      return (this.$data.avatar as Avatar).__loaded ? "visible" : "hidden";
     },
     "@load"() {
-      this.$data.avatar.send({ type: "img.loaded", src: "element" });
+      (this.$data.avatar as Avatar).send({
+        type: "img.loaded",
+        src: "element",
+      });
     },
     "@error"() {
-      this.$data.avatar.send({ type: "img.error", src: "element" });
+      (this.$data.avatar as Avatar).send({ type: "img.error", src: "element" });
     },
   } as any);
 }
@@ -81,16 +84,16 @@ function handleFallbackProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.fallback.attrs,
     ":dir"() {
-      return this.$data.avatar.prop("dir");
+      return (this.$data.avatar as Avatar).prop("dir");
     },
     ":id"() {
-      return getFallbackId(this.$data.avatar.scope);
+      return getFallbackId((this.$data.avatar as Avatar).scope);
     },
     ":hidden"() {
-      return this.$data.avatar.__loaded;
+      return (this.$data.avatar as Avatar).__loaded;
     },
     ":data-state"() {
-      return this.$data.avatar.__loaded ? "hidden" : "visible";
+      return (this.$data.avatar as Avatar).__loaded ? "hidden" : "visible";
     },
   } as any);
 }

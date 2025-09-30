@@ -1,4 +1,3 @@
-// @ts-nocheck this
 import {
   dataAttr,
   getEventTarget,
@@ -25,9 +24,9 @@ export default function (Alpine: Alpine) {
             checkbox: new Checkbox(evaluateLater(expression)),
           }),
           "x-init"() {
-            this.$data.checkbox.init();
+            (this.$data.checkbox as Checkbox).init();
           },
-        });
+        } as any);
       } else if (value === "root") handleRootProps(el, Alpine);
       else if (value === "label") handleLabelProps(el, Alpine);
       else if (value === "control") handleControlProps(el, Alpine);
@@ -79,266 +78,268 @@ function handleRootProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.root.attrs,
     ":data-active"() {
-      return dataAttr(this.$data.checkbox.context.get("active"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("active"));
     },
     ":data-focus"() {
-      return dataAttr(this.$data.checkbox.__focused);
+      return dataAttr((this.$data.checkbox as Checkbox).__focused);
     },
     ":data-focus-visible"() {
-      return dataAttr(this.$data.checkbox.__focusVisible);
+      return dataAttr((this.$data.checkbox as Checkbox).__focusVisible);
     },
     ":data-readonly"() {
-      return dataAttr(this.$data.checkbox.__readOnly);
+      return dataAttr((this.$data.checkbox as Checkbox).__readOnly);
     },
     ":data-hover"() {
-      return dataAttr(this.$data.checkbox.context.get("hovered"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("hovered"));
     },
     ":data-disabled"() {
-      return dataAttr(this.$data.checkbox.__disabled);
+      return dataAttr((this.$data.checkbox as Checkbox).__disabled);
     },
     ":data-state"() {
-      return this.$data.checkbox.__indeterminate
+      return (this.$data.checkbox as Checkbox).__indeterminate
         ? "indeterminate"
-        : this.$data.checkbox.__checked
+        : (this.$data.checkbox as Checkbox).__checked
         ? "checked"
         : "unchecked";
     },
     ":data-invalid"() {
-      return dataAttr(this.$data.checkbox.__invalid);
+      return dataAttr((this.$data.checkbox as Checkbox).__invalid);
     },
     ":data-required"() {
-      return dataAttr(this.$data.checkbox.__required);
+      return dataAttr((this.$data.checkbox as Checkbox).__required);
     },
 
     ":dir"() {
-      return this.$data.checkbox.prop("dir");
+      return (this.$data.checkbox as Checkbox).prop("dir");
     },
     ":id"() {
-      return getRootId(this.$data.checkbox.scope);
+      return getRootId((this.$data.checkbox as Checkbox).scope);
     },
     ":for"() {
-      return getHiddenInputId(this.$data.checkbox.scope);
+      return getHiddenInputId((this.$data.checkbox as Checkbox).scope);
     },
     "@pointermove"() {
-      if (this.$data.checkbox.__disabled) return;
-      this.$data.checkbox.send({
+      if ((this.$data.checkbox as Checkbox).__disabled) return;
+      (this.$data.checkbox as Checkbox).send({
         type: "CONTEXT.SET",
         context: { hovered: true },
       });
     },
     "@pointerleave"() {
-      if (this.$data.checkbox.__disabled) return;
-      this.$data.checkbox.send({
+      if ((this.$data.checkbox as Checkbox).__disabled) return;
+      (this.$data.checkbox as Checkbox).send({
         type: "CONTEXT.SET",
         context: { hovered: false },
       });
     },
-    "@click"(event) {
+    "@click"(event: MouseEvent) {
       const target = getEventTarget<Element>(event);
-      if (target === getHiddenInputEl(this.$data.checkbox.scope)) {
+      if (
+        target === getHiddenInputEl((this.$data.checkbox as Checkbox).scope)
+      ) {
         event.stopPropagation();
       }
     },
-  });
+  } as any);
 }
 
 function handleLabelProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.label.attrs,
     ":data-active"() {
-      return dataAttr(this.$data.checkbox.context.get("active"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("active"));
     },
     ":data-focus"() {
-      return dataAttr(this.$data.checkbox.__focused);
+      return dataAttr((this.$data.checkbox as Checkbox).__focused);
     },
     ":data-focus-visible"() {
-      return dataAttr(this.$data.checkbox.__focusVisible);
+      return dataAttr((this.$data.checkbox as Checkbox).__focusVisible);
     },
     ":data-readonly"() {
-      return dataAttr(this.$data.checkbox.__readOnly);
+      return dataAttr((this.$data.checkbox as Checkbox).__readOnly);
     },
     ":data-hover"() {
-      return dataAttr(this.$data.checkbox.context.get("hovered"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("hovered"));
     },
     ":data-disabled"() {
-      return dataAttr(this.$data.checkbox.__disabled);
+      return dataAttr((this.$data.checkbox as Checkbox).__disabled);
     },
     ":data-state"() {
-      return this.$data.checkbox.__indeterminate
+      return (this.$data.checkbox as Checkbox).__indeterminate
         ? "indeterminate"
-        : this.$data.checkbox.__checked
+        : (this.$data.checkbox as Checkbox).__checked
         ? "checked"
         : "unchecked";
     },
     ":data-invalid"() {
-      return dataAttr(this.$data.checkbox.__invalid);
+      return dataAttr((this.$data.checkbox as Checkbox).__invalid);
     },
     ":data-required"() {
-      return dataAttr(this.$data.checkbox.__required);
+      return dataAttr((this.$data.checkbox as Checkbox).__required);
     },
 
     ":dir"() {
-      return this.$data.checkbox.prop("dir");
+      return (this.$data.checkbox as Checkbox).prop("dir");
     },
     ":id"() {
-      return getLabelId(this.$data.checkbox.scope);
+      return getLabelId((this.$data.checkbox as Checkbox).scope);
     },
-  });
+  } as any);
 }
 
 function handleControlProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.control.attrs,
     ":data-active"() {
-      return dataAttr(this.$data.checkbox.context.get("active"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("active"));
     },
     ":data-focus"() {
-      return dataAttr(this.$data.checkbox.__focused);
+      return dataAttr((this.$data.checkbox as Checkbox).__focused);
     },
     ":data-focus-visible"() {
-      return dataAttr(this.$data.checkbox.__focusVisible);
+      return dataAttr((this.$data.checkbox as Checkbox).__focusVisible);
     },
     ":data-readonly"() {
-      return dataAttr(this.$data.checkbox.__readOnly);
+      return dataAttr((this.$data.checkbox as Checkbox).__readOnly);
     },
     ":data-hover"() {
-      return dataAttr(this.$data.checkbox.context.get("hovered"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("hovered"));
     },
     ":data-disabled"() {
-      return dataAttr(this.$data.checkbox.__disabled);
+      return dataAttr((this.$data.checkbox as Checkbox).__disabled);
     },
     ":data-state"() {
-      return this.$data.checkbox.__indeterminate
+      return (this.$data.checkbox as Checkbox).__indeterminate
         ? "indeterminate"
-        : this.$data.checkbox.__checked
+        : (this.$data.checkbox as Checkbox).__checked
         ? "checked"
         : "unchecked";
     },
     ":data-invalid"() {
-      return dataAttr(this.$data.checkbox.__invalid);
+      return dataAttr((this.$data.checkbox as Checkbox).__invalid);
     },
     ":data-required"() {
-      return dataAttr(this.$data.checkbox.__required);
+      return dataAttr((this.$data.checkbox as Checkbox).__required);
     },
 
     ":dir"() {
-      return this.$data.checkbox.prop("dir");
+      return (this.$data.checkbox as Checkbox).prop("dir");
     },
     ":id"() {
-      return getControlId(this.$data.checkbox.scope);
+      return getControlId((this.$data.checkbox as Checkbox).scope);
     },
     ":aria-hidden"() {
       return true;
     },
-  });
+  } as any);
 }
 
 function handleIndicatorProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ...parts.indicator.attrs,
     ":data-active"() {
-      return dataAttr(this.$data.checkbox.context.get("active"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("active"));
     },
     ":data-focus"() {
-      return dataAttr(this.$data.checkbox.__focused);
+      return dataAttr((this.$data.checkbox as Checkbox).__focused);
     },
     ":data-focus-visible"() {
-      return dataAttr(this.$data.checkbox.__focusVisible);
+      return dataAttr((this.$data.checkbox as Checkbox).__focusVisible);
     },
     ":data-readonly"() {
-      return dataAttr(this.$data.checkbox.__readOnly);
+      return dataAttr((this.$data.checkbox as Checkbox).__readOnly);
     },
     ":data-hover"() {
-      return dataAttr(this.$data.checkbox.context.get("hovered"));
+      return dataAttr((this.$data.checkbox as Checkbox).context.get("hovered"));
     },
     ":data-disabled"() {
-      return dataAttr(this.$data.checkbox.__disabled);
+      return dataAttr((this.$data.checkbox as Checkbox).__disabled);
     },
     ":data-state"() {
-      return this.$data.checkbox.__indeterminate
+      return (this.$data.checkbox as Checkbox).__indeterminate
         ? "indeterminate"
-        : this.$data.checkbox.__checked
+        : (this.$data.checkbox as Checkbox).__checked
         ? "checked"
         : "unchecked";
     },
     ":data-invalid"() {
-      return dataAttr(this.$data.checkbox.__invalid);
+      return dataAttr((this.$data.checkbox as Checkbox).__invalid);
     },
     ":data-required"() {
-      return dataAttr(this.$data.checkbox.__required);
+      return dataAttr((this.$data.checkbox as Checkbox).__required);
     },
 
     ":dir"() {
-      return this.$data.checkbox.prop("dir");
+      return (this.$data.checkbox as Checkbox).prop("dir");
     },
     ":hidden"() {
-      return !this.$data.checkbox.__indeterminate &&
-        !this.$data.checkbox.__checked;
+      return !(this.$data.checkbox as Checkbox).__indeterminate &&
+        !(this.$data.checkbox as Checkbox).__checked;
     },
-  });
+  } as any);
 }
 
 function handleHiddenInputProps(el: ElementWithXAttributes, Alpine: Alpine) {
   Alpine.bind(el, {
     ":id"() {
-      return getHiddenInputId(this.$data.checkbox.scope);
+      return getHiddenInputId((this.$data.checkbox as Checkbox).scope);
     },
     ":type"() {
       return "checkbox";
     },
     ":required"() {
-      return this.$data.checkbox.prop("required");
+      return (this.$data.checkbox as Checkbox).prop("required");
     },
     ":defaultChecked"() {
-      return this.$data.checkbox.__checked;
+      return (this.$data.checkbox as Checkbox).__checked;
     },
     ":disabled"() {
-      return this.$data.checkbox.__disabled;
+      return (this.$data.checkbox as Checkbox).__disabled;
     },
     ":aria-labelledby"() {
-      return getLabelId(this.$data.checkbox.scope);
+      return getLabelId((this.$data.checkbox as Checkbox).scope);
     },
     ":aria-invalid"() {
-      return this.$data.checkbox.__invalid;
+      return (this.$data.checkbox as Checkbox).__invalid;
     },
     ":name"() {
-      return this.$data.checkbox.prop("name");
+      return (this.$data.checkbox as Checkbox).prop("name");
     },
     ":form"() {
-      return this.$data.checkbox.prop("form");
+      return (this.$data.checkbox as Checkbox).prop("form");
     },
     ":value"() {
-      return this.$data.checkbox.prop("value");
+      return (this.$data.checkbox as Checkbox).prop("value");
     },
     ":style"() {
       return visuallyHiddenStyle;
     },
     "@focus"() {
       const focusVisible = isFocusVisible();
-      this.$data.checkbox.send({
+      (this.$data.checkbox as Checkbox).send({
         type: "CONTEXT.SET",
         context: { focused: true, focusVisible },
       });
     },
     "@blur"() {
-      this.$data.checkbox.send({
+      (this.$data.checkbox as Checkbox).send({
         type: "CONTEXT.SET",
         context: { focused: false, focusVisible: false },
       });
     },
-    "@click"(event) {
-      if (this.$data.checkbox.__readOnly) {
+    "@click"(event: MouseEvent) {
+      if ((this.$data.checkbox as Checkbox).__readOnly) {
         event.preventDefault();
         return;
       }
 
       // @ts-ignore event target
       const checked = event.currentTarget.checked;
-      this.$data.checkbox.send({
+      (this.$data.checkbox as Checkbox).send({
         type: "CHECKED.SET",
         checked,
         isTrusted: true,
       });
     },
-  });
+  } as any);
 }
