@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@hono/hono@^4.9.9": "4.9.9",
     "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.1.7__picomatch@4.0.3",
+
     "npm:@types/alpinejs@^3.13.11": "3.13.11",
     "npm:@unocss/eslint-config@^66.5.2": "66.5.2_eslint@9.36.0",
     "npm:@unocss/reset@^66.5.2": "66.5.2",
