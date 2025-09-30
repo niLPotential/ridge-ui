@@ -93,7 +93,6 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     evaluateProps((userProps) => {
       const { id, ids, getRootNode } = userProps as any;
       this.scope = createScope({ id, ids, getRootNode });
-      console.log("create scope");
     });
 
     // create prop
