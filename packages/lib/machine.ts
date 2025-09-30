@@ -21,11 +21,6 @@ import { bindable } from "./bindable.ts";
 import { createRefs } from "./refs.ts";
 import { track } from "./track.ts";
 
-/**
- * Basic Zag machine constructor for Alpine.js.
- * Extended per component to establish connection.
- * Inspired by Zag's vanilla-ts example.
- */
 export class AlpineMachine<T extends MachineSchema> implements Service<T> {
   scope: Scope = null as any;
   ctx: BindableContext<T>;
