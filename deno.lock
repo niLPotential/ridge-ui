@@ -14,6 +14,7 @@
     "npm:@zag-js/core@^1.24.2": "1.24.2",
     "npm:@zag-js/dom-query@^1.24.2": "1.24.2",
     "npm:@zag-js/focus-visible@^1.24.2": "1.24.2",
+    "npm:@zag-js/types@^1.25.0": "1.25.0",
     "npm:@zag-js/utils@^1.24.2": "1.24.2",
     "npm:alpinejs@^3.15.0": "3.15.0",
     "npm:domco@^4.3.1": "4.3.1_vite@7.1.7__picomatch@4.0.3",
@@ -828,7 +829,7 @@
         "@zag-js/anatomy",
         "@zag-js/core",
         "@zag-js/dom-query",
-        "@zag-js/types",
+        "@zag-js/types@1.24.2",
         "@zag-js/utils"
       ]
     },
@@ -842,7 +843,7 @@
         "@zag-js/core",
         "@zag-js/dom-query",
         "@zag-js/rect-utils",
-        "@zag-js/types",
+        "@zag-js/types@1.24.2",
         "@zag-js/utils"
       ]
     },
@@ -852,7 +853,7 @@
         "@zag-js/anatomy",
         "@zag-js/core",
         "@zag-js/dom-query",
-        "@zag-js/types",
+        "@zag-js/types@1.24.2",
         "@zag-js/utils"
       ]
     },
@@ -863,7 +864,7 @@
         "@zag-js/core",
         "@zag-js/dom-query",
         "@zag-js/focus-visible",
-        "@zag-js/types",
+        "@zag-js/types@1.24.2",
         "@zag-js/utils"
       ]
     },
@@ -877,7 +878,7 @@
     "@zag-js/dom-query@1.24.2": {
       "integrity": "sha512-CrjxXni9S9sxuz64uveHDGsvXcZPuN8ydg5+UFZh0MTXCCpS2nFdSWJ1ZN4uyak+X0CdyIEvvbzdxmEhBi33dQ==",
       "dependencies": [
-        "@zag-js/types"
+        "@zag-js/types@1.24.2"
       ]
     },
     "@zag-js/focus-visible@1.24.2": {
@@ -891,6 +892,12 @@
     },
     "@zag-js/types@1.24.2": {
       "integrity": "sha512-sXL8JHx8yrj8qGwCl/EhydaHoCCEfYwbg1rPWcCwqrpkvhic0KEZAJZMUhcU4dLdx+Oajbv2QeFz6Fk5U2Nn5A==",
+      "dependencies": [
+        "csstype"
+      ]
+    },
+    "@zag-js/types@1.25.0": {
+      "integrity": "sha512-EmgettGQcHtZUp0I+XDSknpsbfsreYVD1U0XC0N0Xnpamn9elAC0ESbmP8bisjrGoN07m5ky4QjSMkkQotu1SQ==",
       "dependencies": [
         "csstype"
       ]
@@ -1757,6 +1764,7 @@
       "npm:@zag-js/core@^1.24.2",
       "npm:@zag-js/dom-query@^1.24.2",
       "npm:@zag-js/focus-visible@^1.24.2",
+      "npm:@zag-js/types@^1.25.0",
       "npm:alpinejs@^3.15.0"
     ],
     "members": {
