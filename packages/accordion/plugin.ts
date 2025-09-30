@@ -253,6 +253,13 @@ function handleItemTriggerProps(
       },
       "@focus"() {
         if ((this.$data.accordion as Accordion).__isDisabled(props)) return;
+        (this.$data.accordion as Accordion).send({
+          type: "TRIGGER.FOCUS",
+          value: props.value,
+        });
+      },
+      "@blur"() {
+        if ((this.$data.accordion as Accordion).__isDisabled(props)) return;
         (this.$data.accordion as Accordion).send({ type: "TRIGGER.BLUR" });
       },
       "@click"(event: any) {
