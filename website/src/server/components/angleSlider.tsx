@@ -1,6 +1,18 @@
 export default function AngleSliderDemo() {
   return (
     <div x-data="{disabled: false, readOnly: false, step: 1}">
+      <div>
+        <input type="checkbox" id="disabled" x-model="disabled" />
+        <label for="disabled">disabled</label>
+      </div>
+      <div>
+        <input type="checkbox" id="readOnly" x-model="readOnly" />
+        <label for="readOnly">readOnly</label>
+      </div>
+      <div>
+        <input type="number" id="step" x-model="step" />
+        <label for="step">step</label>
+      </div>
       <div
         x-angle-slider="{disabled, readOnly, step, id: 37}"
         x-angle-slider:root
