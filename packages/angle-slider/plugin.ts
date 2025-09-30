@@ -11,6 +11,7 @@ import {
   getControlId,
   getHiddenInputId,
   getRootId,
+  getThumbEl,
   getThumbId,
   getValueTextId,
 } from "./dom.ts";
@@ -103,7 +104,7 @@ function handleLabelProps(el: ElementWithXAttributes, Alpine: Alpine) {
     "@click"(event: MouseEvent) {
       if (!(this.$data.angleSlider as AngleSlider).__interactive) return;
       event.preventDefault();
-      getThumbId((this.$data.angleSlider as AngleSlider).scope)?.focus();
+      getThumbEl((this.$data.angleSlider as AngleSlider).scope)?.focus();
     },
   } as any);
 }
