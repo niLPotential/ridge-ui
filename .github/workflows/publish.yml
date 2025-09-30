@@ -12,11 +12,13 @@ jobs:
       id-token: write
     strategy:
       matrix:
-        package: ["lib", "accordion", "angle-slider", "avatar", "checkbox"]
+        package: [accordion, angle-slider, avatar, checkbox]
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
+      - name: Publish lib
+        run: deno publish -c ./packages/lib/deno.json
       - name: Publish ${{matrix.package}}
         run: deno publish -c ./packages/${{matrix.package}}/deno.json
