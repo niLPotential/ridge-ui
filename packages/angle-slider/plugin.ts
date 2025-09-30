@@ -43,7 +43,7 @@ export default function (Alpine: Alpine) {
     },
   ).before("bind");
 
-  Alpine.magic("angle-slider", (el, { Alpine }) => {
+  Alpine.magic("angleSlider", (el, { Alpine }) => {
     const { angleSlider } = Alpine.$data(el) as { angleSlider: AngleSlider };
 
     return {
@@ -149,7 +149,7 @@ function handleControlProps(el: ElementWithXAttributes, Alpine: Alpine) {
       });
       event.stopPropagation();
     },
-    style() {
+    ":style"() {
       return {
         touchAction: "none",
         userSelect: "none",
@@ -230,7 +230,7 @@ function handleThumbProps(el: ElementWithXAttributes, Alpine: Alpine) {
           break;
       }
     },
-    style() {
+    ":style"() {
       return {
         rotate: `var(--angle)`,
       };
@@ -278,7 +278,7 @@ function handleMarkerProps(
       ":data-disabled"() {
         return dataAttr((this.$data.angleSlider as AngleSlider).__disabled);
       },
-      style() {
+      ":style"() {
         return {
           "--marker-value": props.value,
           rotate: `calc(var(--marker-value) * 1deg)`,
