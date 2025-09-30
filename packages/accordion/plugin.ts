@@ -49,7 +49,13 @@ export default function (Alpine: Alpine) {
         return accordion.__value;
       },
       setValue: accordion.__setValue,
-      getItemState: accordion.__getItemState,
+      getItemState(props: ItemProps) {
+        return {
+          expanded: accordion.__value.includes(props.value),
+          focused: accordion.__focusedValue === props.value,
+          disabled: Boolean(props.disabled ?? accordion.prop("disabled")),
+        };
+      },
     };
   });
 }
@@ -74,13 +80,11 @@ function handleItemProps(
   Alpine: Alpine,
   evaluateProps: (callback: (itemProps: ItemProps) => void) => void,
 ) {
-  Alpine.bind(el, function () {
+  Alpine.bind(el, () => {
     let props: ItemProps;
     evaluateProps((itemProps) => {
       props = itemProps;
     });
-    // @ts-ignore item props
-    const itemState = (this.$data.accordion as Accordion).__getItemState(props);
     return {
       ...parts.item.attrs,
       ":dir"() {
@@ -93,13 +97,17 @@ function handleItemProps(
         );
       },
       ":data-state"() {
-        return itemState.expanded ? "open" : "closed";
+        return (this.$data.accordion as Accordion).__isExpanded(props)
+          ? "open"
+          : "closed";
       },
       ":data-focus"() {
-        return dataAttr(itemState.focused);
+        return dataAttr((this.$data.accordion as Accordion).__isFocused(props));
       },
       ":data-disabled"() {
-        return dataAttr(itemState.disabled);
+        return dataAttr(
+          (this.$data.accordion as Accordion).__isDisabled(props),
+        );
       },
       ":data-orientation"() {
         return (this.$data.accordion as Accordion).prop("orientation");
@@ -113,13 +121,11 @@ function handleItemContentProps(
   Alpine: Alpine,
   evaluateProps: (callback: (itemProps: ItemProps) => void) => void,
 ) {
-  Alpine.bind(el, function () {
+  Alpine.bind(el, () => {
     let props: ItemProps;
     evaluateProps((itemProps) => {
       props = itemProps;
     });
-    // @ts-ignore item props
-    const itemState = (this.$data.accordion as Accordion).__getItemState(props);
     return {
       ...parts.itemContent.attrs,
       ":dir"() {
@@ -139,16 +145,20 @@ function handleItemContentProps(
         );
       },
       ":hidden"() {
-        return !itemState.expanded;
+        return !(this.$data.accordion as Accordion).__isExpanded(props);
       },
       ":data-state"() {
-        return itemState.expanded ? "open" : "closed";
+        return (this.$data.accordion as Accordion).__isExpanded(props)
+          ? "open"
+          : "closed";
       },
       ":data-disabled"() {
-        return dataAttr(itemState.disabled);
+        return dataAttr(
+          (this.$data.accordion as Accordion).__isDisabled(props),
+        );
       },
       ":data-focus"() {
-        return dataAttr(itemState.focused);
+        return dataAttr((this.$data.accordion as Accordion).__isFocused(props));
       },
       ":data-orientation"() {
         return (this.$data.accordion as Accordion).prop("orientation");
@@ -162,13 +172,11 @@ function handleItemIndicatorProps(
   Alpine: Alpine,
   evaluateProps: (callback: (itemProps: ItemProps) => void) => void,
 ) {
-  Alpine.bind(el, function () {
+  Alpine.bind(el, () => {
     let props: ItemProps;
     evaluateProps((itemProps) => {
       props = itemProps;
     });
-    // @ts-ignore item props
-    const itemState = (this.$data.accordion as Accordion).__getItemState(props);
     return {
       ...parts.itemIndicator.attrs,
       ":dir"() {
@@ -176,13 +184,17 @@ function handleItemIndicatorProps(
       },
       "aria-hidden": true,
       ":data-state"() {
-        return itemState.expanded ? "open" : "closed";
+        return (this.$data.accordion as Accordion).__isExpanded(props)
+          ? "open"
+          : "closed";
       },
       ":data-disabled"() {
-        return dataAttr(itemState.disabled);
+        return dataAttr(
+          (this.$data.accordion as Accordion).__isDisabled(props),
+        );
       },
       ":data-focus"() {
-        return dataAttr(itemState.focused);
+        return dataAttr((this.$data.accordion as Accordion).__isFocused(props));
       },
       ":data-orientation"() {
         return (this.$data.accordion as Accordion).prop("orientation");
@@ -196,13 +208,11 @@ function handleItemTriggerProps(
   Alpine: Alpine,
   evaluateProps: (callback: (itemProps: ItemProps) => void) => void,
 ) {
-  Alpine.bind(el, function () {
+  Alpine.bind(el, () => {
     let props: ItemProps;
     evaluateProps((itemProps) => {
       props = itemProps;
     });
-    // @ts-ignore item props
-    const itemState = (this.$data.accordion as Accordion).__getItemState(props);
     return {
       ...parts.itemTrigger.attrs,
       type: "button",
@@ -222,29 +232,31 @@ function handleItemTriggerProps(
         );
       },
       ":aria-expanded"() {
-        return itemState.expanded;
+        return (this.$data.accordion as Accordion).__isExpanded(props);
       },
-      disabled() {
-        return itemState.disabled;
+      ":disabled"() {
+        return (this.$data.accordion as Accordion).__isDisabled(props);
       },
       ":data-orientation"() {
         return (this.$data.accordion as Accordion).prop("orientation");
       },
       ":aria-disabled"() {
-        return itemState.disabled;
+        return (this.$data.accordion as Accordion).__isDisabled(props);
       },
       ":data-state"() {
-        return itemState.expanded ? "open" : "closed";
+        return (this.$data.accordion as Accordion).__isExpanded(props)
+          ? "open"
+          : "closed";
       },
       ":data-ownedby"() {
         return getRootId((this.$data.accordion as Accordion).scope);
       },
       "@focus"() {
-        if (itemState.disabled) return;
+        if ((this.$data.accordion as Accordion).__isDisabled(props)) return;
         (this.$data.accordion as Accordion).send({ type: "TRIGGER.BLUR" });
       },
       "@click"(event: any) {
-        if (itemState.disabled) return;
+        if ((this.$data.accordion as Accordion).__isDisabled(props)) return;
         if (isSafari()) {
           event.currentTarget.focus();
         }
@@ -255,7 +267,7 @@ function handleItemTriggerProps(
       },
       "@keydown"(event: any) {
         if (event.defaultPrevented) return;
-        if (itemState.disabled) return;
+        if ((this.$data.accordion as Accordion).__isDisabled(props)) return;
 
         const keyMap: EventKeyMap = {
           ArrowDown: () => {
