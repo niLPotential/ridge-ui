@@ -1,6 +1,6 @@
 export default function AccordionDemo() {
   return (
-    <div x-accordion="{id: 37}" x-accordion:root class="w-md">
+    <div x-data x-accordion="{id: 37}" x-accordion:root class="w-md">
       <div
         x-data="{value: 'Zeroth'}"
         x-accordion:item="{value}"
