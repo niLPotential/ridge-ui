@@ -10,3 +10,6 @@ export const getControlId = (ctx: Scope) =>
   ctx.ids?.control ?? `angle-slider:${ctx.id}:control`;
 export const getValueTextId = (ctx: Scope) =>
   ctx.ids?.valueText ?? `angle-slider:${ctx.id}:value-text`;
+
+export const getThumbEl = (ctx: Scope) =>
+  ctx.getById<HTMLElement>(getThumbId(ctx));

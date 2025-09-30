@@ -75,6 +75,9 @@ app.get("/", (c) =>
           <a href="./angle-slider/">angle slider</a>
         </li>
         <li>
+          <a href="./avatar/">avatar</a>
+        </li>
+        <li>
           <a href="./checkbox/">checkbox</a>
         </li>
       </ul>
@@ -116,5 +119,5 @@ app.get(
 
 export default {
   fetch: app.fetch,
-  prerender: ["/", "/accordion/", "/angle-slider/", "avatar", "/checkbox/"],
+  prerender: ["/", "/accordion/", "/angle-slider/", "/avatar/", "/checkbox/"],
 };

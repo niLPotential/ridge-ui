@@ -21,13 +21,8 @@ import { bindable } from "./bindable.ts";
 import { createRefs } from "./refs.ts";
 import { track } from "./track.ts";
 
-/**
- * Basic Zag machine constructor for Alpine.js.
- * Extended per component to establish connection.
- * Inspired by Zag's vanilla-ts example.
- */
 export class AlpineMachine<T extends MachineSchema> implements Service<T> {
-  scope: Scope;
+  scope: Scope = null as any;
   ctx: BindableContext<T>;
   prop: PropFn<T>;
   private _state: Bindable<T["state"]>;
@@ -85,18 +80,27 @@ export class AlpineMachine<T extends MachineSchema> implements Service<T> {
     if (this.machine.debug) console.log(...args);
   }
 
-  constructor(private machine: Machine<T>, userProps: Partial<T["props"]>) {
+  constructor(
+    private machine: Machine<T>,
+    evaluateProps: (callback: (userProps: Partial<T["props"]>) => void) => void,
+  ) {
     // create scope
-    const { id, ids, getRootNode } = userProps as any;
-    this.scope = createScope({ id, ids, getRootNode });
+    evaluateProps((userProps) => {
+      const { id, ids, getRootNode } = userProps as any;
+      this.scope = createScope({ id, ids, getRootNode });
+    });
 
     // create prop
     this.prop = (key) => {
-      const props = machine.props?.({
-        props: compact(userProps),
-        scope: this.scope,
-      }) ?? userProps;
-      return props[key] as T["props"][typeof key];
+      let value;
+      evaluateProps((userProps) => {
+        const props = machine.props?.({
+          props: compact(userProps),
+          scope: this.scope,
+        }) ?? userProps;
+        value = props[key];
+      });
+      return value as T["props"][typeof key];
     };
 
     // create context

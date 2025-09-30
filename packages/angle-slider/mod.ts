@@ -1,1 +1,2 @@
-export { AngleSlider } from "./angle-slider.ts";
+import AngleSlider from "./plugin.ts";
+export default AngleSlider;

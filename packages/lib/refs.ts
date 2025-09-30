@@ -1,9 +1,3 @@
-/**
- * Inspired by Zag's vanilla-ts example and vue implementation.
- *
- * @param refs References to hold
- * @returns Getter and setter of reference
- */
 export function createRefs<T>(refs: T) {
   const ref = { current: refs };
   return {
