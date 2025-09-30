@@ -87,10 +87,10 @@ function handleFallbackProps(el: ElementWithXAttributes, Alpine: Alpine) {
       return getFallbackId(this.$data.avatar.scope);
     },
     ":hidden"() {
-      return this.$data.avatar.loaded;
+      return this.$data.avatar.__loaded;
     },
     ":data-state"() {
-      return this.$data.avatar.loaded ? "hidden" : "visible";
+      return this.$data.avatar.__loaded ? "hidden" : "visible";
     },
   } as any);
 }
