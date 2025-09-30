@@ -272,7 +272,7 @@ function handleItemTriggerProps(
           value: props.value,
         });
       },
-      "@keydown"(event: any) {
+      "@keydown"(event: KeyboardEvent) {
         if (event.defaultPrevented) return;
         if ((this.$data.accordion as Accordion).__isDisabled(props)) return;
 
