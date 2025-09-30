@@ -12,10 +12,10 @@ export class Accordion extends AlpineMachine<any> {
     super(accordion.machine, evaluateProps);
   }
 
-  get __focusedValue(): string {
+  get __focusedValue() {
     return this.context.get("focusedValue");
   }
-  get __value(): string[] {
+  get __value() {
     return this.context.get("value");
   }
   get __multiple() {
@@ -30,11 +30,13 @@ export class Accordion extends AlpineMachine<any> {
     this.send({ type: "VALUE.SET", value: nextValue });
   }
 
-  __getItemState(props: accordion.ItemProps): accordion.ItemState {
-    return {
-      expanded: this.__value.includes(props.value),
-      focused: this.__focusedValue === props.value,
-      disabled: Boolean(props.disabled ?? this.prop("disabled")),
-    };
+  __isExpanded(props: accordion.ItemProps) {
+    return this.__value.includes(props.value);
+  }
+  __isFocused(props: accordion.ItemProps) {
+    return this.__focusedValue === props.value;
+  }
+  __isDisabled(props: accordion.ItemProps) {
+    return Boolean(props.disabled ?? this.prop("disabled"));
   }
 }
