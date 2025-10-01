@@ -41,63 +41,47 @@ export default function (Alpine: Alpine) {
           },
         } as any);
       } else if (value === "root") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getRootProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getRootProps,
+        );
       } else if (value === "label") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getLabelProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getLabelProps,
+        );
       } else if (value === "hidden-input") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getHiddenInputProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getHiddenInputProps,
+        );
       } else if (value === "control") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getControlProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getControlProps,
+        );
       } else if (value === "thumb") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getThumbProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getThumbProps,
+        );
       } else if (value === "value-text") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getValueTextProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getValueTextProps,
+        );
       } else if (value === "marker-group") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getMarkerGroupProps,
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getMarkerGroupProps,
+        );
       } else if (value === "marker") {
-        Alpine.effect(() => {
-          Alpine.bind(
-            el,
-            (Alpine.$data(el).api as angleSlider.Api).getMarkerProps(
-              evaluate(expression),
-            ),
-          );
-        });
+        Alpine.bind(
+          el,
+          (Alpine.$data(el).api as angleSlider.Api).getMarkerProps(
+            evaluate(expression),
+          ),
+        );
       }
     },
   ).before("bind");
