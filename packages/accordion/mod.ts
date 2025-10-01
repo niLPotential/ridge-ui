@@ -22,10 +22,10 @@ import Accordion from "./plugin.ts";
  * Alpine.js accordion plugin powered by Zag
  *
  * ```ts
- *  import Alpine from "alpinejs"
- *  import Accordion from "@ridge-ui/accordion"
+ *  import Alpine from "alpinejs";
+ *  import Accordion from "@ridge-ui/accordion";
  *
- *  Alpine.plugin(Accordion)
+ *  Alpine.plugin(Accordion);
  * ```
  */
 export default Accordion;
