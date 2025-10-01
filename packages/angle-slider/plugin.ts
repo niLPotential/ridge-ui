@@ -36,9 +36,6 @@ export default function (Alpine: Alpine) {
               },
             };
           },
-          "x-effect"() {
-            this.$data.api = angleSlider.connect(service, normalizeProps);
-          },
         } as any);
       } else if (value === "root") {
         Alpine.bind(
