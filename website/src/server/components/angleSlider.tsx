@@ -20,8 +20,7 @@ export default function AngleSliderDemo() {
       >
         <label x-angle-slider:label class="flex items-center gap-2">
           Angle Slider:{" "}
-          <div x-angle-slider:value-text x-text="$angleSlider.valueAsDegree">
-          </div>
+          <div x-angle-slider:value-text x-text="api.valueAsDegree"></div>
         </label>
         <div
           x-angle-slider:control

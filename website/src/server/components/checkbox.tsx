@@ -1,6 +1,6 @@
 export default function CheckboxDemo() {
   return (
-    <div x-data="{disabled: true, invalid: false}">
+    <div x-data="{disabled: false, invalid: false}">
       <div>
         <input type="checkbox" id="disabled" x-model="disabled" />
         <label for="disabled">disabled</label>
@@ -21,7 +21,7 @@ export default function CheckboxDemo() {
         </div>
         <span x-checkbox:label>
           Input is
-          <span x-text="$checkbox.checked ? ' checked' : ' unchecked'"></span>
+          <span x-text="api.checked ? ' checked' : ' unchecked'"></span>
         </span>
         <input x-checkbox:hidden-input />
       </label>
